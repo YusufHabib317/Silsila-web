@@ -17,17 +17,16 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import {
+  IconBrandWhatsapp,
   IconBriefcase,
   IconBuildingStore,
   IconLogout,
   IconMessageCircle,
-  IconSettings,
 } from '@tabler/icons-react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 
-import { buildRoute } from '@/data/routes';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { logout } from '@/lib/api/auth';
 import { getApiErrorMessage } from '@/lib/api/errors';
 import { ensureCsrfToken } from '@/lib/api/session-token';
@@ -39,11 +38,17 @@ type ProtectedAppShellProps = {
   locale: string;
 };
 
+type AppLocale = 'en' | 'ar';
+
 const NAV_ITEMS = [
-  { href: '/app', icon: IconBuildingStore, label: 'Dashboard' },
-  { href: '/app/inbox', icon: IconMessageCircle, label: 'Inbox' },
-  { href: '/app/orders', icon: IconBriefcase, label: 'Orders' },
-  { href: '/app/settings/whatsapp', icon: IconSettings, label: 'Settings' },
+  { href: '/app', icon: IconBuildingStore, labelKey: 'dashboard' },
+  { href: '/app/inbox', icon: IconMessageCircle, labelKey: 'inbox' },
+  { href: '/app/orders', icon: IconBriefcase, labelKey: 'orders' },
+  {
+    href: '/app/settings/whatsapp',
+    icon: IconBrandWhatsapp,
+    labelKey: 'whatsapp',
+  },
 ];
 
 function FullScreenState({ label }: { label: string }) {
@@ -68,6 +73,7 @@ export function ProtectedAppShell({
   children,
   locale,
 }: ProtectedAppShellProps) {
+  const t = useTranslations('common.appShell');
   useSessionBootstrap();
 
   const [isNavbarOpened, { close: closeNavbar, toggle: toggleNavbar }] =
@@ -85,6 +91,13 @@ export function ProtectedAppShell({
     () => tenants.map((tenant) => ({ label: tenant.name, value: tenant.id })),
     [tenants],
   );
+  const languageOptions = useMemo(
+    () => [
+      { label: t('languages.en'), value: 'en' },
+      { label: t('languages.ar'), value: 'ar' },
+    ],
+    [t],
+  );
 
   const selectedTenant = tenants.find(
     (tenant) => tenant.id === selectedTenantId,
@@ -93,9 +106,9 @@ export function ProtectedAppShell({
 
   useEffect(() => {
     if (status === 'anonymous') {
-      router.replace(buildRoute(locale, '/login'));
+      router.replace('/login');
     }
-  }, [locale, router, status]);
+  }, [router, status]);
 
   useEffect(() => {
     if (
@@ -104,16 +117,17 @@ export function ProtectedAppShell({
       !selectedTenantId &&
       !isTenantSelectionRoute
     ) {
-      router.replace(buildRoute(locale, '/app/select-tenant'));
+      router.replace('/app/select-tenant');
     }
-  }, [
-    isTenantSelectionRoute,
-    locale,
-    router,
-    selectedTenantId,
-    status,
-    tenants,
-  ]);
+  }, [isTenantSelectionRoute, router, selectedTenantId, status, tenants]);
+
+  function handleLocaleChange(value: string | null) {
+    if (!value || value === locale) {
+      return;
+    }
+
+    router.replace(pathname, { locale: value as AppLocale });
+  }
 
   async function handleLogout() {
     setIsSigningOut(true);
@@ -125,21 +139,21 @@ export function ProtectedAppShell({
       notifications.show({
         color: 'red',
         message: getApiErrorMessage(error),
-        title: 'Logout request failed',
+        title: t('logoutFailed'),
       });
     } finally {
       clearAuth();
-      router.replace(buildRoute(locale, '/login'));
+      router.replace('/login');
       setIsSigningOut(false);
     }
   }
 
   if (status === 'idle' || status === 'loading') {
-    return <FullScreenState label="Loading workspace" />;
+    return <FullScreenState label={t('loadingWorkspace')} />;
   }
 
   if (status !== 'authenticated') {
-    return <FullScreenState label="Opening sign in" />;
+    return <FullScreenState label={t('openingSignIn')} />;
   }
 
   return (
@@ -160,7 +174,7 @@ export function ProtectedAppShell({
         <Group h="100%" justify="space-between" px="md" wrap="nowrap">
           <Group gap="sm" wrap="nowrap">
             <Burger
-              aria-label="Toggle navigation"
+              aria-label={t('toggleNavigation')}
               hiddenFrom="sm"
               onClick={toggleNavbar}
               opened={isNavbarOpened}
@@ -175,7 +189,14 @@ export function ProtectedAppShell({
           </Group>
           <Group gap="sm" wrap="nowrap">
             <Select
-              aria-label="Tenant"
+              aria-label={t('language')}
+              data={languageOptions}
+              onChange={handleLocaleChange}
+              value={locale}
+              w={116}
+            />
+            <Select
+              aria-label={t('tenant')}
               data={tenantOptions}
               onChange={(value) => {
                 if (value) {
@@ -191,7 +212,7 @@ export function ProtectedAppShell({
               onClick={handleLogout}
               variant="subtle"
             >
-              Logout
+              {t('logout')}
             </Button>
           </Group>
         </Group>
@@ -201,15 +222,14 @@ export function ProtectedAppShell({
         <Stack gap="xs">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
-            const href = buildRoute(locale, item.href);
 
             return (
               <NavLink
                 key={item.href}
-                active={pathname === href}
+                active={pathname === item.href}
                 component={Link}
-                href={href}
-                label={item.label}
+                href={item.href}
+                label={t(`nav.${item.labelKey}`)}
                 leftSection={<Icon size={18} />}
                 onClick={closeNavbar}
               />

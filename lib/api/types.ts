@@ -63,3 +63,36 @@ export type Paginated<TItem> = {
   items: TItem[];
   pageInfo: PageInfo;
 };
+
+export type WhatsappAccountStatus =
+  | 'pending_qr'
+  | 'qr_ready'
+  | 'connecting'
+  | 'connected'
+  | 'disconnected'
+  | 'reconnecting'
+  | 'expired'
+  | 'failed'
+  | 'disabled';
+
+export type WhatsappAccount = {
+  id: string;
+  phoneNumber: string | null;
+  displayName: string | null;
+  status: WhatsappAccountStatus;
+  lastConnectedAt: string | null;
+  lastDisconnectedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type WhatsappAccountDetail = WhatsappAccount & {
+  qrAvailable: boolean;
+  qrCode: string | null;
+  qrExpiresAt: string | null;
+};
+
+export type CreateWhatsappAccountRequest = {
+  phoneNumber?: string | null;
+  displayName?: string | null;
+};

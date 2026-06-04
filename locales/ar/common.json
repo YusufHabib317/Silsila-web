@@ -1,1 +1,120 @@
-{}
+{
+  "appShell": {
+    "loadingWorkspace": "جار تحميل مساحة العمل",
+    "language": "اللغة",
+    "languages": {
+      "ar": "العربية",
+      "en": "الإنجليزية"
+    },
+    "logout": "تسجيل الخروج",
+    "logoutFailed": "فشل طلب تسجيل الخروج",
+    "nav": {
+      "dashboard": "لوحة التحكم",
+      "inbox": "الوارد",
+      "orders": "الطلبات",
+      "whatsapp": "واتساب"
+    },
+    "openingSignIn": "جار فتح تسجيل الدخول",
+    "tenant": "المتجر",
+    "toggleNavigation": "تبديل التنقل"
+  },
+  "whatsapp": {
+    "account": {
+      "unnamed": "حساب غير مسمى"
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "connect": "اتصال",
+      "disconnect": "قطع الاتصال",
+      "loadMore": "تحميل المزيد",
+      "refresh": "تحديث",
+      "refreshStatus": "تحديث الحالة",
+      "viewQr": "عرض QR",
+      "viewStatus": "عرض الحالة"
+    },
+    "connection": {
+      "expiresIn": "ينتهي خلال {time}",
+      "qrAlt": "رمز QR لاتصال واتساب",
+      "qrUnavailable": "رمز QR غير متاح لحالة الحساب الحالية.",
+      "title": "رمز QR لواتساب"
+    },
+    "create": {
+      "displayNameLabel": "اسم العرض",
+      "displayNamePlaceholder": "خط المبيعات الرئيسي",
+      "phoneNumberLabel": "رقم الهاتف",
+      "phoneNumberPlaceholder": "+963 ...",
+      "submit": "إنشاء وفتح QR",
+      "title": "إضافة حساب"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "disconnect": {
+      "confirm": "قطع الاتصال عن {account}؟",
+      "description": "ستتم إزالة جلسة واتساب المحفوظة، وسيكون مسح QR جديد مطلوبا لاحقا.",
+      "title": "قطع اتصال حساب واتساب"
+    },
+    "empty": {
+      "noAccounts": "لا توجد حسابات واتساب تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل إدارة حسابات واتساب."
+    },
+    "errors": {
+      "accountIdMissing": "معرف حساب واتساب مفقود"
+    },
+    "filters": {
+      "allStatuses": "كل الحالات"
+    },
+    "form": {
+      "displayNameTooLong": "يجب ألا يتجاوز اسم العرض 80 حرفا",
+      "invalidPhoneNumber": "أدخل رقم هاتف صالحا"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "الحسابات"
+    },
+    "notifications": {
+      "connectFailed": "فشل طلب الاتصال",
+      "createFailed": "فشل إنشاء الحساب",
+      "createSuccessMessage": "تم إنشاء حساب واتساب.",
+      "createSuccessTitle": "الحساب جاهز",
+      "disconnectFailed": "فشل قطع الاتصال",
+      "disconnectSuccessMessage": "تم قطع جلسة واتساب.",
+      "disconnectSuccessTitle": "تم قطع الاتصال"
+    },
+    "page": {
+      "noAutomatedSending": "لا يوجد إرسال تلقائي",
+      "subtitle": "اتصالات استقبال فقط لرسائل العمل المتتبعة.",
+      "title": "حسابات واتساب"
+    },
+    "status": {
+      "connected": "متصل",
+      "connecting": "جار الاتصال",
+      "disabled": "معطل",
+      "disconnected": "غير متصل",
+      "expired": "منتهي",
+      "failed": "فشل",
+      "pending_qr": "بانتظار QR",
+      "qr_ready": "QR جاهز",
+      "reconnecting": "إعادة الاتصال"
+    },
+    "statusDescription": {
+      "connected": "هذا الحساب جاهز لاستقبال رسائل واتساب.",
+      "connecting": "تم مسح الرمز من الهاتف والجلسة قيد الفتح.",
+      "disabled": "هذا الحساب معطل ولا يمكنه الاتصال.",
+      "disconnected": "لا توجد جلسة واتساب نشطة لهذا الحساب.",
+      "expired": "انتهت صلاحية رمز QR. ابدأ طلب اتصال جديد.",
+      "failed": "فشلت محاولة الاتصال. أعد المحاولة عندما يكون العامل سليما.",
+      "pending_qr": "بانتظار العامل حتى يجهز رمز QR جديدا.",
+      "qr_ready": "امسح رمز QR قبل انتهاء صلاحيته.",
+      "reconnecting": "يحاول العامل استعادة الجلسة المحفوظة."
+    },
+    "table": {
+      "account": "الحساب",
+      "actions": "الإجراءات",
+      "connected": "اتصل",
+      "lastActivity": "آخر نشاط",
+      "status": "الحالة",
+      "updated": "حدث"
+    }
+  }
+}

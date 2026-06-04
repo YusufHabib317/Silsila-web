@@ -1,1 +1,120 @@
-{}
+{
+  "appShell": {
+    "loadingWorkspace": "Loading workspace",
+    "language": "Language",
+    "languages": {
+      "ar": "Arabic",
+      "en": "English"
+    },
+    "logout": "Logout",
+    "logoutFailed": "Logout request failed",
+    "nav": {
+      "dashboard": "Dashboard",
+      "inbox": "Inbox",
+      "orders": "Orders",
+      "whatsapp": "WhatsApp"
+    },
+    "openingSignIn": "Opening sign in",
+    "tenant": "Tenant",
+    "toggleNavigation": "Toggle navigation"
+  },
+  "whatsapp": {
+    "account": {
+      "unnamed": "Unnamed account"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "loadMore": "Load more",
+      "refresh": "Refresh",
+      "refreshStatus": "Refresh status",
+      "viewQr": "View QR",
+      "viewStatus": "View status"
+    },
+    "connection": {
+      "expiresIn": "Expires in {time}",
+      "qrAlt": "WhatsApp connection QR code",
+      "qrUnavailable": "QR code is not available for the current account status.",
+      "title": "WhatsApp QR"
+    },
+    "create": {
+      "displayNameLabel": "Display name",
+      "displayNamePlaceholder": "Main sales line",
+      "phoneNumberLabel": "Phone number",
+      "phoneNumberPlaceholder": "+963 ...",
+      "submit": "Create and open QR",
+      "title": "Add account"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "disconnect": {
+      "confirm": "Disconnect {account}?",
+      "description": "The saved WhatsApp session will be removed and a fresh QR scan will be required later.",
+      "title": "Disconnect WhatsApp account"
+    },
+    "empty": {
+      "noAccounts": "No WhatsApp accounts match this view.",
+      "selectTenant": "Select a tenant before managing WhatsApp accounts."
+    },
+    "errors": {
+      "accountIdMissing": "WhatsApp account id is missing"
+    },
+    "filters": {
+      "allStatuses": "All statuses"
+    },
+    "form": {
+      "displayNameTooLong": "Display name must be 80 characters or fewer",
+      "invalidPhoneNumber": "Enter a valid phone number"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Accounts"
+    },
+    "notifications": {
+      "connectFailed": "Connection request failed",
+      "createFailed": "Account creation failed",
+      "createSuccessMessage": "WhatsApp account was created.",
+      "createSuccessTitle": "Account ready",
+      "disconnectFailed": "Disconnect failed",
+      "disconnectSuccessMessage": "WhatsApp session was disconnected.",
+      "disconnectSuccessTitle": "Disconnected"
+    },
+    "page": {
+      "noAutomatedSending": "No automated sending",
+      "subtitle": "Receive-only connections for tracked business messages.",
+      "title": "WhatsApp Accounts"
+    },
+    "status": {
+      "connected": "Connected",
+      "connecting": "Connecting",
+      "disabled": "Disabled",
+      "disconnected": "Disconnected",
+      "expired": "Expired",
+      "failed": "Failed",
+      "pending_qr": "Pending QR",
+      "qr_ready": "QR ready",
+      "reconnecting": "Reconnecting"
+    },
+    "statusDescription": {
+      "connected": "This account is ready to ingest WhatsApp messages.",
+      "connecting": "The phone has scanned the code and the session is opening.",
+      "disabled": "This account is disabled and cannot connect.",
+      "disconnected": "This account has no active WhatsApp session.",
+      "expired": "The QR code expired. Start a new connection request.",
+      "failed": "The connection attempt failed. Retry when the worker is healthy.",
+      "pending_qr": "Waiting for the worker to prepare a fresh QR code.",
+      "qr_ready": "Scan the QR code before it expires.",
+      "reconnecting": "The worker is restoring the saved session."
+    },
+    "table": {
+      "account": "Account",
+      "actions": "Actions",
+      "connected": "Connected",
+      "lastActivity": "Last activity",
+      "status": "Status",
+      "updated": "Updated"
+    }
+  }
+}
