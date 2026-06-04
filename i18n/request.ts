@@ -1,6 +1,8 @@
 import { getRequestConfig, setRequestLocale } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
+
+import { LocaleCookie } from '@/data';
 
 import { routing } from './routing';
 
@@ -11,13 +13,15 @@ export async function loadMessages(locale: string) {
   };
 }
 
-export async function resolveLocale(params: Promise<{ locale: string }>) {
-  const { locale } = await params;
+export async function getCookieLocale() {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get(LocaleCookie)?.value;
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
+  return hasLocale(routing.locales, locale) ? locale : routing.defaultLocale;
+}
 
+export async function resolveCookieLocale() {
+  const locale = await getCookieLocale();
   setRequestLocale(locale);
 
   const messages = await loadMessages(locale);
@@ -26,11 +30,8 @@ export async function resolveLocale(params: Promise<{ locale: string }>) {
   return { locale, messages, dir } as const;
 }
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  const requested = await requestLocale;
-  const locale = hasLocale(routing.locales, requested)
-    ? requested
-    : routing.defaultLocale;
+export default getRequestConfig(async () => {
+  const locale = await getCookieLocale();
 
   return {
     locale,

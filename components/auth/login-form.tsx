@@ -24,11 +24,7 @@ import { ensureCsrfToken } from '@/lib/api/session-token';
 import { buildRoute } from '@/data/routes';
 import { useSessionStore } from '@/store/session';
 
-type LoginFormProps = {
-  locale: string;
-};
-
-export function LoginForm({ locale }: LoginFormProps) {
+export function LoginForm() {
   const router = useRouter();
   const setAuth = useSessionStore((state) => state.setAuth);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +50,6 @@ export function LoginForm({ locale }: LoginFormProps) {
       setAuth(response);
       router.replace(
         buildRoute(
-          locale,
           response.tenants.length === 1 ? '/app' : '/app/select-tenant',
         ),
       );
@@ -116,11 +111,7 @@ export function LoginForm({ locale }: LoginFormProps) {
           <Text c="dimmed" size="sm">
             New tenant?
           </Text>
-          <Anchor
-            component={Link}
-            href={buildRoute(locale, '/register')}
-            size="sm"
-          >
+          <Anchor component={Link} href={buildRoute('/register')} size="sm">
             Create account
           </Anchor>
         </Group>

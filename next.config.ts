@@ -3,8 +3,6 @@ import withPWAInit from '@ducanh2912/next-pwa';
 import createNextIntlPlugin from 'next-intl/plugin';
 import path from 'path';
 
-import { defaultLocale } from './data/constants';
-
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const withPWA = withPWAInit({
   dest: 'public',
@@ -39,7 +37,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/',
-        destination: `/${defaultLocale}/login`,
+        destination: '/login',
         permanent: false,
       },
     ];

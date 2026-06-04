@@ -1,14 +1,12 @@
-export function buildRoute(locale: string, path: string) {
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-
-  return `/${locale}${normalizedPath}`;
+export function buildRoute(path: string) {
+  return path.startsWith('/') ? path : `/${path}`;
 }
 
 export const ROUTES = {
-  app: (locale: string) => buildRoute(locale, '/app'),
-  login: (locale: string) => buildRoute(locale, '/login'),
-  register: (locale: string) => buildRoute(locale, '/register'),
-  selectTenant: (locale: string) => buildRoute(locale, '/app/select-tenant'),
+  app: () => buildRoute('/app'),
+  login: () => buildRoute('/login'),
+  register: () => buildRoute('/register'),
+  selectTenant: () => buildRoute('/app/select-tenant'),
 } as const;
 
 export const authPages = ['/login', '/register'];

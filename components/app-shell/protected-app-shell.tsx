@@ -25,9 +25,11 @@ import {
   IconMessageCircle,
 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
-import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { LocaleCookie } from '@/data';
 import { logout } from '@/lib/api/auth';
 import { getApiErrorMessage } from '@/lib/api/errors';
 import { ensureCsrfToken } from '@/lib/api/session-token';
@@ -39,7 +41,7 @@ type ProtectedAppShellProps = {
   locale: string;
 };
 
-type AppLocale = 'en' | 'ar';
+const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
 const NAV_ITEMS = [
   { href: '/app', icon: IconBuildingStore, labelKey: 'dashboard' },
@@ -132,7 +134,14 @@ export function ProtectedAppShell({
       return;
     }
 
-    router.replace(pathname, { locale: value as AppLocale });
+    document.cookie = [
+      `${LocaleCookie}=${value}`,
+      'path=/',
+      `max-age=${LOCALE_COOKIE_MAX_AGE}`,
+      'samesite=lax',
+    ].join('; ');
+    router.replace(pathname);
+    router.refresh();
   }
 
   async function handleLogout() {

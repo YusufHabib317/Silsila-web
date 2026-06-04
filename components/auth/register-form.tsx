@@ -24,11 +24,7 @@ import { ensureCsrfToken } from '@/lib/api/session-token';
 import { buildRoute } from '@/data/routes';
 import { useSessionStore } from '@/store/session';
 
-type RegisterFormProps = {
-  locale: string;
-};
-
-export function RegisterForm({ locale }: RegisterFormProps) {
+export function RegisterForm() {
   const router = useRouter();
   const setAuth = useSessionStore((state) => state.setAuth);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,7 +52,7 @@ export function RegisterForm({ locale }: RegisterFormProps) {
       await ensureCsrfToken();
       const response = await register(values);
       setAuth(response);
-      router.replace(buildRoute(locale, '/app'));
+      router.replace(buildRoute('/app'));
     } catch (error) {
       notifications.show({
         color: 'red',
@@ -127,11 +123,7 @@ export function RegisterForm({ locale }: RegisterFormProps) {
           <Text c="dimmed" size="sm">
             Already registered?
           </Text>
-          <Anchor
-            component={Link}
-            href={buildRoute(locale, '/login')}
-            size="sm"
-          >
+          <Anchor component={Link} href={buildRoute('/login')} size="sm">
             Sign in
           </Anchor>
         </Group>

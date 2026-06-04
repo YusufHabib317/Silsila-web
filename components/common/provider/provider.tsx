@@ -27,6 +27,7 @@ export function Providers({ children, locale }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <DirectionProvider
+        key={locale}
         initialDirection={locale === 'ar' ? 'rtl' : 'ltr'}
         detectDirection={false}
       >

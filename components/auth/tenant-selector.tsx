@@ -16,11 +16,7 @@ import { useRouter } from 'next/navigation';
 import { buildRoute } from '@/data/routes';
 import { useSessionStore } from '@/store/session';
 
-type TenantSelectorProps = {
-  locale: string;
-};
-
-export function TenantSelector({ locale }: TenantSelectorProps) {
+export function TenantSelector() {
   const router = useRouter();
   const selectedTenantId = useSessionStore((state) => state.selectedTenantId);
   const selectTenant = useSessionStore((state) => state.selectTenant);
@@ -28,7 +24,7 @@ export function TenantSelector({ locale }: TenantSelectorProps) {
 
   function handleSelectTenant(tenantId: string) {
     selectTenant(tenantId);
-    router.replace(buildRoute(locale, '/app'));
+    router.replace(buildRoute('/app'));
   }
 
   return (

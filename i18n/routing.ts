@@ -5,7 +5,7 @@ import { defaultLocale, LocaleCookie } from '@/data';
 export const routing = defineRouting({
   locales: ['en', 'ar'],
   defaultLocale,
-  localePrefix: 'as-needed',
+  localePrefix: 'never',
   localeCookie: {
     name: LocaleCookie,
     maxAge: 60 * 60 * 24 * 365, // 1 year
