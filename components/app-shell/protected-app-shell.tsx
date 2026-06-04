@@ -20,6 +20,7 @@ import {
   IconBrandWhatsapp,
   IconBriefcase,
   IconBuildingStore,
+  IconListCheck,
   IconLogout,
   IconMessageCircle,
 } from '@tabler/icons-react';
@@ -48,6 +49,11 @@ const NAV_ITEMS = [
     href: '/app/settings/whatsapp',
     icon: IconBrandWhatsapp,
     labelKey: 'whatsapp',
+  },
+  {
+    href: '/app/settings/tracking',
+    icon: IconListCheck,
+    labelKey: 'tracking',
   },
 ];
 

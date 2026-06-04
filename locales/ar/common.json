@@ -12,11 +12,175 @@
       "dashboard": "لوحة التحكم",
       "inbox": "الوارد",
       "orders": "الطلبات",
+      "tracking": "التتبع",
       "whatsapp": "واتساب"
     },
     "openingSignIn": "جار فتح تسجيل الدخول",
     "tenant": "المتجر",
     "toggleNavigation": "تبديل التنقل"
+  },
+  "inbox": {
+    "account": {
+      "unnamed": "حساب غير مسمى"
+    },
+    "actions": {
+      "loadMore": "تحميل المزيد",
+      "refresh": "تحديث"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "detail": {
+      "chatExternalId": "معرف المحادثة الخارجي",
+      "empty": "اختر رسالة لعرض التفاصيل.",
+      "expiresAt": "تنتهي في",
+      "externalMessageId": "معرف الرسالة الخارجي",
+      "messageBody": "نص الرسالة",
+      "messageId": "معرف الرسالة",
+      "rawPayloadHidden": "لا يتم عرض JSON الخام لرسائل واتساب في هذا الوارد.",
+      "receivedAt": "وصلت في",
+      "senderPhone": "هاتف المرسل"
+    },
+    "empty": {
+      "noMessages": "لا توجد رسائل واتساب تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل فتح الوارد."
+    },
+    "errors": {
+      "messageIdMissing": "معرف رسالة واتساب مفقود"
+    },
+    "filters": {
+      "account": "الحساب",
+      "active": "نشط",
+      "allAccounts": "كل الحسابات",
+      "allArchived": "كل حالات الأرشفة",
+      "allChats": "كل المحادثات",
+      "allLinked": "كل حالات الربط",
+      "allMessageTypes": "كل أنواع الرسائل",
+      "allPersonal": "كل الحالات الشخصية",
+      "allTracked": "كل حالات التتبع",
+      "archived": "مؤرشف",
+      "archivedState": "الأرشفة",
+      "business": "عمل",
+      "chat": "المحادثة",
+      "linked": "مرتبط",
+      "linkedState": "الربط",
+      "messageType": "النوع",
+      "personal": "شخصي",
+      "personalState": "الشخصي",
+      "search": "بحث",
+      "searchPlaceholder": "نص الرسالة",
+      "tracked": "متتبع",
+      "trackedState": "التتبع",
+      "unlinked": "غير مرتبط",
+      "untracked": "غير متتبع"
+    },
+    "flags": {
+      "archived": "مؤرشف",
+      "linked": "مرتبط",
+      "personal": "شخصي",
+      "temporary": "مؤقت",
+      "tracked": "متتبع"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "الرسائل"
+    },
+    "message": {
+      "noText": "لا يوجد نص",
+      "notAvailable": "غير متاح",
+      "unknownChat": "محادثة غير معروفة",
+      "unknownSender": "مرسل غير معروف",
+      "you": "أنت"
+    },
+    "messageType": {
+      "audio": "صوت",
+      "contact": "جهة اتصال",
+      "document": "مستند",
+      "image": "صورة",
+      "location": "موقع",
+      "sticker": "ملصق",
+      "text": "نص",
+      "unknown": "غير معروف",
+      "video": "فيديو",
+      "voice": "رسالة صوتية"
+    },
+    "page": {
+      "noReplyActions": "لا توجد إجراءات رد",
+      "subtitle": "تصفح رسائل واتساب المستلمة وافحص حالة تتبعها.",
+      "title": "الوارد"
+    }
+  },
+  "tracking": {
+    "account": {
+      "unnamed": "حساب غير مسمى"
+    },
+    "actions": {
+      "loadMore": "تحميل المزيد",
+      "refresh": "تحديث",
+      "save": "حفظ"
+    },
+    "chat": {
+      "unnamed": "محادثة غير مسماة"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "editor": {
+      "sourceType": "نوع المصدر",
+      "status": "حالة التتبع",
+      "statusPlaceholder": "اختر الحالة"
+    },
+    "empty": {
+      "noChats": "لا توجد محادثات واتساب تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل إدارة التتبع."
+    },
+    "filters": {
+      "account": "الحساب",
+      "allAccounts": "كل الحسابات",
+      "allSourceTypes": "كل أنواع المصادر",
+      "allTrackingStatuses": "كل حالات التتبع",
+      "search": "بحث",
+      "searchPlaceholder": "اسم المحادثة أو معرفها",
+      "sourceType": "نوع المصدر",
+      "trackingStatus": "التتبع"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "المحادثات"
+    },
+    "notifications": {
+      "updateFailed": "فشل تحديث التتبع",
+      "updateSuccessMessage": "تم تحديث تتبع المحادثة.",
+      "updateSuccessTitle": "تم حفظ التتبع"
+    },
+    "page": {
+      "receiveOnly": "إعداد استقبال فقط",
+      "subtitle": "صنف محادثات واتساب حتى يميز الوارد بين مصادر العمل والمتجاهلة والشخصية.",
+      "title": "إعداد التتبع"
+    },
+    "sourceType": {
+      "agent_group": "مجموعة وكيل",
+      "customer_chat": "محادثة عميل",
+      "internal_team": "فريق داخلي",
+      "merchant_group": "مجموعة تاجر",
+      "supplier_chat": "محادثة مورد",
+      "unknown": "غير معروف"
+    },
+    "status": {
+      "ignored": "متجاهل",
+      "personal": "شخصي",
+      "tracked": "متتبع",
+      "unconfigured": "غير محدد"
+    },
+    "table": {
+      "account": "الحساب",
+      "actions": "الإجراءات",
+      "chat": "المحادثة",
+      "created": "أنشئ",
+      "sourceType": "نوع المصدر",
+      "tracking": "التتبع",
+      "updated": "حدث"
+    }
   },
   "whatsapp": {
     "account": {

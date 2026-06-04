@@ -12,11 +12,175 @@
       "dashboard": "Dashboard",
       "inbox": "Inbox",
       "orders": "Orders",
+      "tracking": "Tracking",
       "whatsapp": "WhatsApp"
     },
     "openingSignIn": "Opening sign in",
     "tenant": "Tenant",
     "toggleNavigation": "Toggle navigation"
+  },
+  "inbox": {
+    "account": {
+      "unnamed": "Unnamed account"
+    },
+    "actions": {
+      "loadMore": "Load more",
+      "refresh": "Refresh"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "detail": {
+      "chatExternalId": "Chat external id",
+      "empty": "Select a message to inspect details.",
+      "expiresAt": "Expires at",
+      "externalMessageId": "External message id",
+      "messageBody": "Message body",
+      "messageId": "Message id",
+      "rawPayloadHidden": "Raw WhatsApp payload JSON is not exposed in this inbox.",
+      "receivedAt": "Received at",
+      "senderPhone": "Sender phone"
+    },
+    "empty": {
+      "noMessages": "No WhatsApp messages match this view.",
+      "selectTenant": "Select a tenant before opening the inbox."
+    },
+    "errors": {
+      "messageIdMissing": "WhatsApp message id is missing"
+    },
+    "filters": {
+      "account": "Account",
+      "active": "Active",
+      "allAccounts": "All accounts",
+      "allArchived": "Any archive state",
+      "allChats": "All chats",
+      "allLinked": "Any link state",
+      "allMessageTypes": "All message types",
+      "allPersonal": "Any personal state",
+      "allTracked": "Any tracking state",
+      "archived": "Archived",
+      "archivedState": "Archive",
+      "business": "Business",
+      "chat": "Chat",
+      "linked": "Linked",
+      "linkedState": "Linked",
+      "messageType": "Type",
+      "personal": "Personal",
+      "personalState": "Personal",
+      "search": "Search",
+      "searchPlaceholder": "Message text",
+      "tracked": "Tracked",
+      "trackedState": "Tracking",
+      "unlinked": "Unlinked",
+      "untracked": "Untracked"
+    },
+    "flags": {
+      "archived": "Archived",
+      "linked": "Linked",
+      "personal": "Personal",
+      "temporary": "Temporary",
+      "tracked": "Tracked"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Messages"
+    },
+    "message": {
+      "noText": "No text body",
+      "notAvailable": "Not available",
+      "unknownChat": "Unknown chat",
+      "unknownSender": "Unknown sender",
+      "you": "You"
+    },
+    "messageType": {
+      "audio": "Audio",
+      "contact": "Contact",
+      "document": "Document",
+      "image": "Image",
+      "location": "Location",
+      "sticker": "Sticker",
+      "text": "Text",
+      "unknown": "Unknown",
+      "video": "Video",
+      "voice": "Voice"
+    },
+    "page": {
+      "noReplyActions": "No reply actions",
+      "subtitle": "Browse received WhatsApp messages and inspect their tracking state.",
+      "title": "Inbox"
+    }
+  },
+  "tracking": {
+    "account": {
+      "unnamed": "Unnamed account"
+    },
+    "actions": {
+      "loadMore": "Load more",
+      "refresh": "Refresh",
+      "save": "Save"
+    },
+    "chat": {
+      "unnamed": "Unnamed chat"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "editor": {
+      "sourceType": "Source type",
+      "status": "Tracking status",
+      "statusPlaceholder": "Choose status"
+    },
+    "empty": {
+      "noChats": "No WhatsApp chats match this view.",
+      "selectTenant": "Select a tenant before managing tracking."
+    },
+    "filters": {
+      "account": "Account",
+      "allAccounts": "All accounts",
+      "allSourceTypes": "All source types",
+      "allTrackingStatuses": "All tracking states",
+      "search": "Search",
+      "searchPlaceholder": "Chat name or id",
+      "sourceType": "Source type",
+      "trackingStatus": "Tracking"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Chats"
+    },
+    "notifications": {
+      "updateFailed": "Tracking update failed",
+      "updateSuccessMessage": "Chat tracking was updated.",
+      "updateSuccessTitle": "Tracking saved"
+    },
+    "page": {
+      "receiveOnly": "Receive-only setup",
+      "subtitle": "Classify WhatsApp chats so the inbox can separate business, ignored, and personal sources.",
+      "title": "Tracking Setup"
+    },
+    "sourceType": {
+      "agent_group": "Agent group",
+      "customer_chat": "Customer chat",
+      "internal_team": "Internal team",
+      "merchant_group": "Merchant group",
+      "supplier_chat": "Supplier chat",
+      "unknown": "Unknown"
+    },
+    "status": {
+      "ignored": "Ignored",
+      "personal": "Personal",
+      "tracked": "Tracked",
+      "unconfigured": "Not set"
+    },
+    "table": {
+      "account": "Account",
+      "actions": "Actions",
+      "chat": "Chat",
+      "created": "Created",
+      "sourceType": "Source type",
+      "tracking": "Tracking",
+      "updated": "Updated"
+    }
   },
   "whatsapp": {
     "account": {
