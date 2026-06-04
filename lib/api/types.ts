@@ -64,6 +64,68 @@ export type Paginated<TItem> = {
   pageInfo: PageInfo;
 };
 
+export type OrderStatus =
+  | 'new'
+  | 'needs_review'
+  | 'confirmed'
+  | 'preparing'
+  | 'shipped'
+  | 'delivered'
+  | 'paid'
+  | 'cancelled'
+  | 'returned'
+  | 'failed';
+
+export type PaymentStatus =
+  | 'unpaid'
+  | 'partial'
+  | 'paid'
+  | 'refunded'
+  | 'unknown';
+
+export type DeliveryStatus =
+  | 'not_started'
+  | 'preparing'
+  | 'with_delivery'
+  | 'delivered'
+  | 'returned'
+  | 'failed'
+  | 'unknown';
+
+export type OrderLineItem = {
+  id: string;
+  productId: string | null;
+  title: string;
+  quantity: number;
+  unitAmountMinor: number | null;
+  totalAmountMinor: number | null;
+  currency: string;
+  createdAt: string;
+};
+
+export type Order = {
+  id: string;
+  orderNumber: string;
+  customerContactId: string | null;
+  merchantContactId: string | null;
+  agentContactId: string | null;
+  sourceBundleId: string | null;
+  status: OrderStatus;
+  paymentStatus: PaymentStatus;
+  deliveryStatus: DeliveryStatus;
+  totalAmountMinor: number | null;
+  currency: string;
+  notes: string | null;
+  createdByUserId: string | null;
+  items: OrderLineItem[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateOrderStatusRequest = {
+  status: OrderStatus;
+};
+
 export type WhatsappAccountStatus =
   | 'pending_qr'
   | 'qr_ready'

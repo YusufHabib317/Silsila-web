@@ -110,6 +110,99 @@
       "title": "Inbox"
     }
   },
+  "orders": {
+    "actions": {
+      "loadMore": "Load more",
+      "refresh": "Refresh"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "detail": {
+      "agentContactId": "Agent contact id",
+      "createdAt": "Created at",
+      "createdByUserId": "Created by user id",
+      "currency": "Currency",
+      "customerContactId": "Customer contact id",
+      "deliveryStatus": "Delivery status",
+      "empty": "Select an order to inspect details.",
+      "itemTitle": "Item",
+      "lineItems": "Line items",
+      "merchantContactId": "Merchant contact id",
+      "notes": "Notes",
+      "orderId": "Order id",
+      "paymentStatus": "Payment status",
+      "quantity": "Qty",
+      "sourceBundleId": "Source bundle id",
+      "status": "Order status",
+      "totalAmount": "Total",
+      "unitAmount": "Unit",
+      "updatedAt": "Updated at"
+    },
+    "deliveryStatus": {
+      "delivered": "Delivered",
+      "failed": "Failed",
+      "not_started": "Not started",
+      "preparing": "Preparing",
+      "returned": "Returned",
+      "unknown": "Unknown",
+      "with_delivery": "With delivery"
+    },
+    "empty": {
+      "noOrders": "No orders match this view.",
+      "selectTenant": "Select a tenant before opening orders."
+    },
+    "errors": {
+      "orderIdMissing": "Order id is missing"
+    },
+    "filters": {
+      "allDeliveryStatuses": "All delivery states",
+      "allPaymentStatuses": "All payment states",
+      "allStatuses": "All orders",
+      "deliveryStatus": "Delivery",
+      "paymentStatus": "Payment",
+      "search": "Search",
+      "searchPlaceholder": "Order number or notes"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Orders"
+    },
+    "notifications": {
+      "statusUpdateFailed": "Order update failed",
+      "statusUpdateSuccessMessage": "Order {orderNumber} moved to {status}.",
+      "statusUpdateSuccessTitle": "Order updated"
+    },
+    "order": {
+      "itemCount": "{count, plural, one {# item} other {# items}}",
+      "noItems": "This order has no line items.",
+      "notAvailable": "Not available"
+    },
+    "page": {
+      "badge": "Backend orders",
+      "subtitle": "Review customer orders, payment state, and delivery progress.",
+      "title": "Orders"
+    },
+    "paymentStatus": {
+      "paid": "Paid",
+      "partial": "Partial",
+      "refunded": "Refunded",
+      "unknown": "Unknown",
+      "unpaid": "Unpaid"
+    },
+    "status": {
+      "cancelled": "Cancelled",
+      "confirmed": "Confirmed",
+      "delivered": "Delivered",
+      "failed": "Failed",
+      "needs_review": "Needs review",
+      "new": "New",
+      "paid": "Paid",
+      "preparing": "Preparing",
+      "returned": "Returned",
+      "shipped": "Shipped"
+    }
+  },
   "tracking": {
     "account": {
       "unnamed": "Unnamed account"

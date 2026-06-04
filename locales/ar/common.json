@@ -110,6 +110,99 @@
       "title": "الوارد"
     }
   },
+  "orders": {
+    "actions": {
+      "loadMore": "تحميل المزيد",
+      "refresh": "تحديث"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "detail": {
+      "agentContactId": "معرف جهة اتصال الوكيل",
+      "createdAt": "أنشئ في",
+      "createdByUserId": "أنشئ بواسطة",
+      "currency": "العملة",
+      "customerContactId": "معرف جهة اتصال العميل",
+      "deliveryStatus": "حالة التسليم",
+      "empty": "اختر طلبا لعرض التفاصيل.",
+      "itemTitle": "الصنف",
+      "lineItems": "بنود الطلب",
+      "merchantContactId": "معرف جهة اتصال التاجر",
+      "notes": "ملاحظات",
+      "orderId": "معرف الطلب",
+      "paymentStatus": "حالة الدفع",
+      "quantity": "الكمية",
+      "sourceBundleId": "معرف حزمة المصدر",
+      "status": "حالة الطلب",
+      "totalAmount": "الإجمالي",
+      "unitAmount": "الوحدة",
+      "updatedAt": "حدث في"
+    },
+    "deliveryStatus": {
+      "delivered": "تم التسليم",
+      "failed": "فشل",
+      "not_started": "لم يبدأ",
+      "preparing": "قيد التحضير",
+      "returned": "مرتجع",
+      "unknown": "غير معروف",
+      "with_delivery": "مع المندوب"
+    },
+    "empty": {
+      "noOrders": "لا توجد طلبات تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل فتح الطلبات."
+    },
+    "errors": {
+      "orderIdMissing": "معرف الطلب مفقود"
+    },
+    "filters": {
+      "allDeliveryStatuses": "كل حالات التسليم",
+      "allPaymentStatuses": "كل حالات الدفع",
+      "allStatuses": "كل الطلبات",
+      "deliveryStatus": "التسليم",
+      "paymentStatus": "الدفع",
+      "search": "بحث",
+      "searchPlaceholder": "رقم الطلب أو الملاحظات"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "الطلبات"
+    },
+    "notifications": {
+      "statusUpdateFailed": "فشل تحديث الطلب",
+      "statusUpdateSuccessMessage": "تم نقل الطلب {orderNumber} إلى {status}.",
+      "statusUpdateSuccessTitle": "تم تحديث الطلب"
+    },
+    "order": {
+      "itemCount": "{count, plural, one {# بند} other {# بنود}}",
+      "noItems": "لا يحتوي هذا الطلب على بنود.",
+      "notAvailable": "غير متاح"
+    },
+    "page": {
+      "badge": "طلبات الخلفية",
+      "subtitle": "راجع طلبات العملاء وحالة الدفع وتقدم التسليم.",
+      "title": "الطلبات"
+    },
+    "paymentStatus": {
+      "paid": "مدفوع",
+      "partial": "جزئي",
+      "refunded": "مسترد",
+      "unknown": "غير معروف",
+      "unpaid": "غير مدفوع"
+    },
+    "status": {
+      "cancelled": "ملغى",
+      "confirmed": "مؤكد",
+      "delivered": "تم التسليم",
+      "failed": "فشل",
+      "needs_review": "بحاجة لمراجعة",
+      "new": "جديد",
+      "paid": "مدفوع",
+      "preparing": "قيد التحضير",
+      "returned": "مرتجع",
+      "shipped": "تم الشحن"
+    }
+  },
   "tracking": {
     "account": {
       "unnamed": "حساب غير مسمى"
