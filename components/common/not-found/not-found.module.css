@@ -1,0 +1,6 @@
+.root {
+  padding: 5rem 1rem;
+  min-height: calc(100vh - 8rem);
+  display: grid;
+  place-items: center;
+}

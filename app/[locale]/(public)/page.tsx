@@ -1,6 +1,5 @@
 import { setRequestLocale } from 'next-intl/server';
 
-import { HomePage } from '@/components/landing/home';
 import { SUPPORTED_LOCALES } from '@/data';
 
 export const dynamic = 'force-static';
@@ -19,5 +18,22 @@ export default async function Home({ params }: HomeProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <HomePage />;
+  return (
+    <main
+      style={{
+        minHeight: 'calc(100vh - 4rem)',
+        display: 'grid',
+        placeItems: 'center',
+        textAlign: 'center',
+        padding: '4rem 1rem',
+      }}
+    >
+      <div>
+        <h1 style={{ marginBottom: '0.5rem' }}>
+          Welcome to Silsila ({locale})
+        </h1>
+        <p>Homepage content is pending implementation.</p>
+      </div>
+    </main>
+  );
 }
