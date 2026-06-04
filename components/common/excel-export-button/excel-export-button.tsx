@@ -102,7 +102,7 @@ export function ExcelExportButton<TItem>({
       variant="default"
       size="xs"
       leftSection={<IconDownload size={14} />}
-      className={className}
+      {...(className ? { className } : {})}
       disabled={disabled || items.length === 0}
       loading={isExporting}
       onClick={handleExport}

@@ -1,18 +1,14 @@
-import type { NextConfig } from "next";
-import withPWAInit from "@ducanh2912/next-pwa";
-import createNextIntlPlugin from "next-intl/plugin";
-import path from "path";
+import type { NextConfig } from 'next';
+import withPWAInit from '@ducanh2912/next-pwa';
+import createNextIntlPlugin from 'next-intl/plugin';
+import path from 'path';
 
-import {
-  SUPPORTED_LOCALES,
-  defaultLocale,
-  LocaleCookie,
-} from "./data/constants";
+import { defaultLocale } from './data/constants';
 
-const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const withPWA = withPWAInit({
-  dest: "public",
-  disable: process.env.NODE_ENV === "development",
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
   register: true,
   workboxOptions: {
     skipWaiting: true,
@@ -20,9 +16,9 @@ const withPWA = withPWAInit({
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
-        handler: "NetworkFirst",
+        handler: 'NetworkFirst',
         options: {
-          cacheName: "offlineCache",
+          cacheName: 'offlineCache',
           expiration: {
             maxEntries: 200,
           },
@@ -31,8 +27,6 @@ const withPWA = withPWAInit({
     ],
   },
 });
-
-const nonDefaultLocales = SUPPORTED_LOCALES.filter((l) => l !== defaultLocale);
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -43,16 +37,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      ...nonDefaultLocales.map((locale) => ({
-        source: "/",
-        destination: `/${locale}`,
-        permanent: false,
-        has: [{ type: "cookie" as const, key: LocaleCookie, value: locale }],
-      })),
-      { source: `/${defaultLocale}`, destination: "/", permanent: false },
       {
-        source: `/${defaultLocale}/:path*`,
-        destination: "/:path*",
+        source: '/',
+        destination: `/${defaultLocale}/login`,
         permanent: false,
       },
     ];

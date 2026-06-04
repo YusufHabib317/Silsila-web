@@ -1,28 +1,16 @@
-import { Box, Container } from '@mantine/core';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
 
-import { authOptions } from '@/lib/auth';
-
-import styles from './layout.module.css';
+import { ProtectedAppShell } from '@/components/app-shell/protected-app-shell';
 
 export default async function MainLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  const session = await getServerSession(authOptions);
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-  if (!session) {
-    redirect('/auth/sign-in');
-  }
-
-  return (
-    <Box className={styles.root}>
-      <Box component="header" className={styles.header}></Box>
-      <Box component="main" className={styles.main}>
-        <Container size="xl">{children}</Container>
-      </Box>
-    </Box>
-  );
+  return <ProtectedAppShell locale={locale}>{children}</ProtectedAppShell>;
 }

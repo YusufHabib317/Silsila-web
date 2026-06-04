@@ -11,8 +11,12 @@ export function NotFoundScreen() {
       }}
     >
       <div style={{ textAlign: 'center' }}>
-        <h1 style={{ margin: 0, marginBottom: '0.5rem', fontSize: '2.5rem' }}>404</h1>
-        <p style={{ margin: 0, color: '#555' }}>We couldn&apos;t find this page.</p>
+        <h1 style={{ margin: 0, marginBottom: '0.5rem', fontSize: '2.5rem' }}>
+          404
+        </h1>
+        <p style={{ margin: 0, color: '#555' }}>
+          We couldn&apos;t find this page.
+        </p>
         <p>
           <Link href="/">Go to Home</Link>
         </p>
