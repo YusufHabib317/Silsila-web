@@ -40,6 +40,16 @@ const nextConfig: NextConfig = {
         destination: '/login',
         permanent: false,
       },
+      {
+        source: '/:locale(en|ar)',
+        destination: '/login',
+        permanent: false,
+      },
+      {
+        source: '/:locale(en|ar)/:path*',
+        destination: '/:path*',
+        permanent: false,
+      },
     ];
   },
 };
