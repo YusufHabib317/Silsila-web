@@ -29,7 +29,6 @@ import {
   disconnectWhatsappAccount,
   getWhatsappAccount,
   listWhatsappAccounts,
-  type ListWhatsappAccountsParams,
 } from '@/lib/api/whatsapp';
 import { getApiErrorMessage } from '@/lib/api/errors';
 import { ensureCsrfToken } from '@/lib/api/session-token';
@@ -55,22 +54,7 @@ import {
 } from './whatsapp-ui';
 
 const ACCOUNT_PAGE_LIMIT = 50;
-
-function buildAccountsParams(
-  cursor: string | null,
-  statusFilter: StatusFilter,
-): ListWhatsappAccountsParams {
-  const params: ListWhatsappAccountsParams = {
-    cursor,
-    limit: ACCOUNT_PAGE_LIMIT,
-  };
-
-  if (statusFilter !== 'all') {
-    params.status = statusFilter;
-  }
-
-  return params;
-}
+const ACCOUNT_DETAIL_REFETCH_INTERVAL = 5 * 60 * 1_000;
 
 export function WhatsappSettings() {
   const t = useTranslations('common.whatsapp');
@@ -94,7 +78,11 @@ export function WhatsappSettings() {
       lastPage.pageInfo.hasMore ? lastPage.pageInfo.nextCursor : undefined,
     initialPageParam: null,
     queryFn: ({ pageParam }) =>
-      listWhatsappAccounts(buildAccountsParams(pageParam, statusFilter)),
+      listWhatsappAccounts({
+        cursor: pageParam,
+        limit: ACCOUNT_PAGE_LIMIT,
+        ...(statusFilter === 'all' ? {} : { status: statusFilter }),
+      }),
     queryKey: ['whatsappAccounts', selectedTenantId, statusFilter],
   });
 
@@ -119,7 +107,9 @@ export function WhatsappSettings() {
     refetchInterval: (query) => {
       const account = query.state.data;
 
-      return account && !POLLING_STATUSES.has(account.status) ? false : 2_000;
+      return account && !POLLING_STATUSES.has(account.status)
+        ? false
+        : ACCOUNT_DETAIL_REFETCH_INTERVAL;
     },
   });
 
