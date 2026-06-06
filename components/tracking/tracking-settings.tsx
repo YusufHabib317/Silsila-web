@@ -237,7 +237,11 @@ export function TrackingSettings() {
         onSearchChange={setSearch}
         onSourceTypeFilterChange={setSourceTypeFilter}
         onTrackingStatusFilterChange={setTrackingStatusFilter}
-        savingChatId={updateMutation.variables?.chatId ?? null}
+        savingChatId={
+          updateMutation.isPending
+            ? (updateMutation.variables?.chatId ?? null)
+            : null
+        }
         search={search}
         sourceTypeFilter={sourceTypeFilter}
         trackingStatusFilter={trackingStatusFilter}
