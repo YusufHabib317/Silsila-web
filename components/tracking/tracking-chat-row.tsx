@@ -101,7 +101,10 @@ export function TrackingChatRow({
   const chatKind = getChatKind(chat);
   const kindMeta = CHAT_KIND_META[chatKind];
   const KindIcon = CHAT_KIND_ICON[chatKind];
-  const primaryName = getChatPrimaryName(chat) ?? t(kindMeta.labelKey);
+  const resolvedName = getChatPrimaryName(chat);
+  const primaryName = resolvedName ?? t(kindMeta.labelKey);
+  // When the name already is the kind label ("Group"), skip the redundant badge.
+  const showKindBadge = Boolean(resolvedName);
 
   function handleStatusChange(value: string | null) {
     setStatus(value as DraftTrackingStatus);
@@ -129,9 +132,16 @@ export function TrackingChatRow({
               <Text fw={700} lineClamp={1}>
                 {primaryName}
               </Text>
-              <Badge color={kindMeta.color} radius="sm" size="xs" variant="light">
-                {t(kindMeta.labelKey)}
-              </Badge>
+              {showKindBadge ? (
+                <Badge
+                  color={kindMeta.color}
+                  radius="sm"
+                  size="xs"
+                  variant="light"
+                >
+                  {t(kindMeta.labelKey)}
+                </Badge>
+              ) : null}
               {needsReview ? (
                 <Badge
                   color="orange"
