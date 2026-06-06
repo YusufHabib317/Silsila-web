@@ -9,15 +9,232 @@
     "logout": "Logout",
     "logoutFailed": "Logout request failed",
     "nav": {
+      "adminTenants": "Admin Tenants",
+      "auditLogs": "Audit Logs",
+      "commissions": "Commissions",
+      "contacts": "Contacts",
       "dashboard": "Dashboard",
       "inbox": "Inbox",
       "orders": "Orders",
+      "products": "Products",
+      "system": "System",
       "tracking": "Tracking",
       "whatsapp": "WhatsApp"
     },
     "openingSignIn": "Opening sign in",
     "tenant": "Tenant",
     "toggleNavigation": "Toggle navigation"
+  },
+  "contacts": {
+    "actions": {
+      "cancel": "Cancel",
+      "create": "Create contact",
+      "edit": "Edit",
+      "loadMore": "Load more",
+      "newContact": "New contact",
+      "refresh": "Refresh",
+      "saveChanges": "Save changes"
+    },
+    "contact": {
+      "moreRoles": "+{count, plural, one {# role} other {# roles}}",
+      "noPhone": "No phone number",
+      "notAvailable": "Not available"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "detail": {
+      "contactId": "Contact id",
+      "createdAt": "Created at",
+      "empty": "Select a contact to inspect details.",
+      "globalRole": "Global role",
+      "noRoleContexts": "No role contexts are assigned.",
+      "notes": "Notes",
+      "phoneNumber": "Phone number",
+      "roleContexts": "Role contexts",
+      "updatedAt": "Updated at"
+    },
+    "empty": {
+      "noContacts": "No contacts match this view.",
+      "selectTenant": "Select a tenant before opening contacts."
+    },
+    "errors": {
+      "contactIdMissing": "Contact id is missing"
+    },
+    "filters": {
+      "allRoles": "All roles",
+      "role": "Role",
+      "search": "Search",
+      "searchPlaceholder": "Name, phone, or notes"
+    },
+    "form": {
+      "createTitle": "Create contact",
+      "displayNameLabel": "Display name",
+      "displayNamePlaceholder": "Merchant, agent, or customer name",
+      "displayNameRequired": "Display name is required",
+      "displayNameTooLong": "Display name must be 120 characters or fewer",
+      "editTitle": "Edit contact",
+      "invalidPhoneNumber": "Enter a valid phone number",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Role details, source, or delivery notes",
+      "notesTooLong": "Notes must be 1000 characters or fewer",
+      "phoneNumberLabel": "Phone number",
+      "phoneNumberPlaceholder": "+963 ...",
+      "rolesLabel": "Roles",
+      "rolesPlaceholder": "Choose contact roles"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Contacts"
+    },
+    "notifications": {
+      "createFailed": "Contact creation failed",
+      "createSuccessMessage": "{name} was added to contacts.",
+      "createSuccessTitle": "Contact created",
+      "updateFailed": "Contact update failed",
+      "updateSuccessMessage": "{name} was updated.",
+      "updateSuccessTitle": "Contact updated"
+    },
+    "page": {
+      "badge": "Tenant contacts",
+      "subtitle": "Manage merchants, agents, customers, suppliers, and flexible business roles.",
+      "title": "Contacts"
+    },
+    "role": {
+      "agent": "Agent",
+      "customer": "Customer",
+      "factory": "Factory",
+      "internal": "Internal",
+      "merchant": "Merchant",
+      "supplier": "Supplier",
+      "unknown": "Unknown"
+    }
+  },
+  "products": {
+    "actions": {
+      "addCommission": "Add commission",
+      "cancel": "Cancel",
+      "create": "Create product",
+      "edit": "Edit",
+      "loadMore": "Load more",
+      "newProduct": "New product",
+      "refresh": "Refresh",
+      "saveChanges": "Save changes"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "createPage": {
+      "subtitle": "Create a reviewed product record from WhatsApp context, manual sourcing, or internal stock.",
+      "title": "New Product"
+    },
+    "detail": {
+      "agentAmount": "Agent price",
+      "categoryId": "Category id",
+      "costAmount": "Cost price",
+      "createdByUserId": "Created by user id",
+      "currency": "Currency",
+      "description": "Description",
+      "empty": "Select a product to inspect details.",
+      "merchantContactId": "Merchant contact id",
+      "notes": "Notes",
+      "ownerContactId": "Owner contact id",
+      "productId": "Product id",
+      "saleAmount": "Sale price",
+      "sourceBundleId": "Source bundle id",
+      "updatedAt": "Updated at"
+    },
+    "empty": {
+      "noProducts": "No products match this view.",
+      "selectTenant": "Select a tenant before opening products."
+    },
+    "errors": {
+      "productIdMissing": "Product id is missing"
+    },
+    "filters": {
+      "allOwnerTypes": "All owner types",
+      "allProductStatuses": "All product statuses",
+      "allStockStatuses": "All stock states",
+      "ownerType": "Owner type",
+      "productStatus": "Status",
+      "search": "Search",
+      "searchPlaceholder": "Name, description, or notes",
+      "stockStatus": "Stock"
+    },
+    "form": {
+      "agentAmountLabel": "Agent price",
+      "amountPlaceholder": "0.00",
+      "categoryIdLabel": "Category id",
+      "contactPlaceholder": "Select contact",
+      "costAmountLabel": "Cost price",
+      "createTitle": "Create product",
+      "currencyLabel": "Currency",
+      "currencyPlaceholder": "SYP",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Product details, sizes, colors, or source notes",
+      "descriptionTooLong": "Description must be 2000 characters or fewer",
+      "editTitle": "Edit product",
+      "invalidAmount": "Use a positive number with up to 2 decimals",
+      "invalidCurrency": "Currency must be a 3-letter code",
+      "merchantContactLabel": "Merchant",
+      "nameLabel": "Product name",
+      "namePlaceholder": "Summer dress, kitchen set, perfume bundle",
+      "nameRequired": "Product name is required",
+      "nameTooLong": "Product name must be 160 characters or fewer",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Internal notes, source group, or commission context",
+      "notesTooLong": "Notes must be 1000 characters or fewer",
+      "optionalIdPlaceholder": "Optional backend id",
+      "ownerContactLabel": "Owner contact",
+      "ownerTypeLabel": "Owner type",
+      "productStatusLabel": "Product status",
+      "saleAmountLabel": "Sale price",
+      "sourceBundleIdLabel": "Source bundle id",
+      "stockStatusLabel": "Stock status"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Products"
+    },
+    "notifications": {
+      "createFailed": "Product creation failed",
+      "createSuccessMessage": "{name} was added to products.",
+      "createSuccessTitle": "Product created",
+      "updateFailed": "Product update failed",
+      "updateSuccessMessage": "{name} was updated.",
+      "updateSuccessTitle": "Product updated"
+    },
+    "ownerType": {
+      "agent_product": "Agent product",
+      "factory_product": "Factory product",
+      "merchant_product": "Merchant product",
+      "own_stock": "Own stock",
+      "unknown": "Unknown"
+    },
+    "page": {
+      "badge": "Tenant products",
+      "subtitle": "Track products, source ownership, prices, stock state, and merchant links.",
+      "title": "Products"
+    },
+    "product": {
+      "noDescription": "No description",
+      "notAvailable": "Not available"
+    },
+    "status": {
+      "active": "Active",
+      "archived": "Archived",
+      "deleted": "Deleted",
+      "draft": "Draft",
+      "out_of_stock": "Out of stock",
+      "paused": "Paused",
+      "price_changed": "Price changed"
+    },
+    "stockStatus": {
+      "in_stock": "In stock",
+      "low_stock": "Low stock",
+      "out_of_stock": "Out of stock",
+      "unknown": "Unknown"
+    }
   },
   "inbox": {
     "account": {
@@ -112,8 +329,20 @@
   },
   "orders": {
     "actions": {
+      "addCommission": "Add commission",
+      "addItem": "Add item",
+      "cancel": "Cancel",
+      "create": "Create order",
+      "edit": "Edit",
       "loadMore": "Load more",
-      "refresh": "Refresh"
+      "newOrder": "New order",
+      "refresh": "Refresh",
+      "removeItem": "Remove item",
+      "saveChanges": "Save changes"
+    },
+    "createPage": {
+      "subtitle": "Create a manual order with contacts, product line items, payment state, and delivery defaults.",
+      "title": "New Order"
     },
     "date": {
       "never": "Never"
@@ -164,14 +393,56 @@
       "search": "Search",
       "searchPlaceholder": "Order number or notes"
     },
+    "form": {
+      "agentContactLabel": "Agent",
+      "amountPlaceholder": "0.00",
+      "contactPlaceholder": "Select contact",
+      "createTitle": "Create order",
+      "currencyLabel": "Currency",
+      "currencyPlaceholder": "SYP",
+      "customerContactLabel": "Customer",
+      "deliveryStatusLabel": "Delivery status",
+      "editTitle": "Edit order",
+      "invalidAmount": "Use a positive number with up to 2 decimals",
+      "invalidCurrency": "Currency must be a 3-letter code",
+      "invalidQuantity": "Use a quantity greater than 0",
+      "itemTitleLabel": "Title",
+      "itemTitlePlaceholder": "Product, bundle, or service",
+      "itemTitleRequired": "Line item title is required",
+      "itemTitleTooLong": "Line item title must be 200 characters or fewer",
+      "lineItemsSummary": "{count, plural, one {# line item} other {# line items}}",
+      "lineItemsTitle": "Line items",
+      "merchantContactLabel": "Merchant",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Delivery details, payment context, or internal notes",
+      "notesTooLong": "Notes must be 1000 characters or fewer",
+      "optionalIdPlaceholder": "Optional backend id",
+      "orderNumberLabel": "Order number",
+      "orderNumberPlaceholder": "ORD-20260606-001",
+      "orderNumberRequired": "Order number is required",
+      "orderNumberTooLong": "Order number must be 80 characters or fewer",
+      "paymentStatusLabel": "Payment status",
+      "productLabel": "Product",
+      "productPlaceholder": "Select product",
+      "quantityLabel": "Qty",
+      "sourceBundleIdLabel": "Source bundle id",
+      "statusLabel": "Order status",
+      "unitAmountLabel": "Unit price"
+    },
     "list": {
       "loaded": "{count} loaded",
       "title": "Orders"
     },
     "notifications": {
+      "createFailed": "Order creation failed",
+      "createSuccessMessage": "Order {orderNumber} was created.",
+      "createSuccessTitle": "Order created",
       "statusUpdateFailed": "Order update failed",
       "statusUpdateSuccessMessage": "Order {orderNumber} moved to {status}.",
-      "statusUpdateSuccessTitle": "Order updated"
+      "statusUpdateSuccessTitle": "Order updated",
+      "updateFailed": "Order update failed",
+      "updateSuccessMessage": "Order {orderNumber} was updated.",
+      "updateSuccessTitle": "Order updated"
     },
     "order": {
       "itemCount": "{count, plural, one {# item} other {# items}}",
@@ -201,6 +472,266 @@
       "preparing": "Preparing",
       "returned": "Returned",
       "shipped": "Shipped"
+    }
+  },
+  "commissions": {
+    "actions": {
+      "cancel": "Cancel",
+      "create": "Create commission",
+      "edit": "Edit",
+      "loadMore": "Load more",
+      "newCommission": "New commission",
+      "refresh": "Refresh",
+      "saveChanges": "Save changes"
+    },
+    "commission": {
+      "notAvailable": "Not available"
+    },
+    "createPage": {
+      "subtitle": "Attach an agent, merchant, or manual payout to an order, product, or both.",
+      "title": "New Commission"
+    },
+    "date": {
+      "never": "Never"
+    },
+    "detail": {
+      "amount": "Amount",
+      "commissionId": "Commission id",
+      "contact": "Contact",
+      "contactId": "Contact id",
+      "currency": "Currency",
+      "empty": "Select a commission to inspect details.",
+      "order": "Order",
+      "orderId": "Order id",
+      "paidAt": "Paid at",
+      "percentage": "Percentage",
+      "product": "Product",
+      "productId": "Product id",
+      "updatedAt": "Updated at"
+    },
+    "empty": {
+      "noCommissions": "No commissions match this view.",
+      "selectTenant": "Select a tenant before opening commissions."
+    },
+    "errors": {
+      "commissionIdMissing": "Commission id is missing"
+    },
+    "filters": {
+      "allContacts": "All contacts",
+      "allOrders": "All orders",
+      "allProducts": "All products",
+      "allStatuses": "All commissions",
+      "allTypes": "All commission types",
+      "contact": "Contact",
+      "currency": "Currency",
+      "currencyPlaceholder": "SYP",
+      "order": "Order",
+      "product": "Product",
+      "type": "Type"
+    },
+    "form": {
+      "amountLabel": "Amount",
+      "amountPlaceholder": "0.00",
+      "amountRequired": "Amount is required for manual and fixed commissions",
+      "contactLabel": "Contact",
+      "contactPlaceholder": "Select contact",
+      "contactRequired": "Contact is required",
+      "createTitle": "Create commission",
+      "currencyLabel": "Currency",
+      "currencyPlaceholder": "SYP",
+      "editTitle": "Edit commission",
+      "invalidAmount": "Use a number with up to 2 decimals",
+      "invalidCurrency": "Currency must be a 3-letter code",
+      "invalidPercentage": "Use a percentage with up to 2 decimals",
+      "orderLabel": "Order",
+      "orderPlaceholder": "Select order",
+      "paidAtLabel": "Paid at",
+      "percentageLabel": "Percentage",
+      "percentagePlaceholder": "10.00",
+      "percentageRequired": "Percentage is required for percentage commissions",
+      "productLabel": "Product",
+      "productPlaceholder": "Select product",
+      "statusLabel": "Status",
+      "typeLabel": "Commission type"
+    },
+    "list": {
+      "loaded": "{count} loaded",
+      "title": "Commissions"
+    },
+    "notifications": {
+      "createFailed": "Commission creation failed",
+      "createSuccessMessage": "Commission was created.",
+      "createSuccessTitle": "Commission created",
+      "updateFailed": "Commission update failed",
+      "updateSuccessMessage": "Commission was updated.",
+      "updateSuccessTitle": "Commission updated"
+    },
+    "page": {
+      "badge": "Tenant commissions",
+      "subtitle": "Track payout rules, commission amounts, approval state, and paid records.",
+      "title": "Commissions"
+    },
+    "status": {
+      "approved": "Approved",
+      "cancelled": "Cancelled",
+      "paid": "Paid",
+      "pending": "Pending"
+    },
+    "type": {
+      "fixed_amount": "Fixed amount",
+      "manual": "Manual",
+      "percentage": "Percentage",
+      "unknown": "Unknown"
+    }
+  },
+  "admin": {
+    "access": {
+      "denied": "Platform admin access is required.",
+      "loading": "Checking admin access"
+    },
+    "actions": {
+      "backToTenants": "Back to tenants",
+      "loadMore": "Load more",
+      "refresh": "Refresh",
+      "view": "View"
+    },
+    "auditLogs": {
+      "list": {
+        "loaded": "{count} loaded",
+        "title": "Audit events"
+      },
+      "notAvailable": "Not available",
+      "page": {
+        "badge": "Platform audit",
+        "subtitle": "Inspect platform and tenant-scoped activity by actor, action, and entity.",
+        "title": "Audit Logs"
+      },
+      "systemActor": "System",
+      "table": {
+        "actor": "Actor",
+        "created": "Created",
+        "entity": "Entity",
+        "event": "Event",
+        "metadata": "Metadata",
+        "tenant": "Tenant"
+      }
+    },
+    "date": {
+      "never": "Never"
+    },
+    "empty": {
+      "noAuditLogs": "No audit logs match this view.",
+      "noTenants": "No tenants match this view."
+    },
+    "filters": {
+      "action": "Action",
+      "actionPlaceholder": "tenant.updated",
+      "actorUserId": "Actor user id",
+      "allPlans": "All plans",
+      "allStatuses": "All statuses",
+      "entityType": "Entity type",
+      "entityTypePlaceholder": "tenant",
+      "idPlaceholder": "Exact id",
+      "plan": "Plan",
+      "search": "Search",
+      "status": "Status",
+      "tenantId": "Tenant id",
+      "tenantSearchPlaceholder": "Name or slug"
+    },
+    "system": {
+      "breakdown": {
+        "tenants": "Tenants by status",
+        "whatsappAccounts": "WhatsApp accounts by status"
+      },
+      "health": {
+        "api": "API",
+        "checkedAt": "Checked at",
+        "cleanupWorker": "Cleanup worker",
+        "configured": "Configured",
+        "notConfigured": "Not configured",
+        "r2": "R2 storage",
+        "title": "System health",
+        "whatsappWorker": "WhatsApp worker"
+      },
+      "metrics": {
+        "checkedAt": "Metrics checked at",
+        "expiredPendingDeletion": "Expired pending deletion",
+        "receivedToday": "Messages received today",
+        "temporaryStorage": "Temporary storage",
+        "tenants": "Tenants",
+        "trackedToday": "Tracked today",
+        "whatsappAccounts": "WhatsApp accounts"
+      },
+      "page": {
+        "badge": "Platform health",
+        "subtitle": "Monitor tenant totals, WhatsApp account states, message ingestion, storage, and worker health.",
+        "title": "System"
+      }
+    },
+    "tenantDetail": {
+      "counts": {
+        "activeUsers": "Active users",
+        "orders": "Orders",
+        "products": "Products",
+        "temporaryMediaObjects": "Temporary media",
+        "untrackedMessagesPendingDeletion": "Untracked pending deletion",
+        "whatsappAccounts": "WhatsApp accounts"
+      },
+      "page": {
+        "badge": "Tenant detail",
+        "subtitle": "Review tenant membership, WhatsApp account status, and commerce counts."
+      },
+      "summary": {
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "users": {
+        "created": "Created",
+        "empty": "No users are attached to this tenant.",
+        "role": "Role",
+        "status": "Status",
+        "title": "Users",
+        "user": "User"
+      },
+      "whatsapp": {
+        "account": "Account",
+        "connected": "Last connected",
+        "created": "Created",
+        "empty": "No WhatsApp accounts are attached to this tenant.",
+        "status": "Status",
+        "title": "WhatsApp accounts",
+        "unnamed": "Unnamed account"
+      }
+    },
+    "tenantPlan": {
+      "enterprise": "Enterprise",
+      "free": "Free",
+      "pro": "Pro",
+      "starter": "Starter"
+    },
+    "tenantStatus": {
+      "active": "Active",
+      "deleted": "Deleted",
+      "disabled": "Disabled",
+      "trial": "Trial"
+    },
+    "tenants": {
+      "list": {
+        "loaded": "{count} loaded",
+        "title": "Tenants"
+      },
+      "page": {
+        "badge": "Platform admin",
+        "subtitle": "Inspect tenant status, plans, and operational counts across the platform.",
+        "title": "Tenants"
+      },
+      "table": {
+        "actions": "Actions",
+        "plan": "Plan",
+        "status": "Status",
+        "tenant": "Tenant",
+        "updated": "Updated"
+      }
     }
   },
   "tracking": {

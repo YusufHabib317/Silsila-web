@@ -7,17 +7,15 @@ import {
   Group,
   Loader,
   Paper,
-  ScrollArea,
   Select,
   Stack,
-  Tabs,
   Text,
   TextInput,
   Title,
 } from '@mantine/core';
 import {
   IconAlertTriangle,
-  IconBriefcase,
+  IconPackage,
   IconPlus,
   IconRefresh,
   IconSearch,
@@ -26,39 +24,39 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 
 import { getApiErrorMessage } from '@/lib/api/errors';
-import type { Order } from '@/lib/api/types';
+import type { Product } from '@/lib/api/types';
 
-import { OrderRow } from './order-row';
+import { ProductRow } from './product-row';
 import {
-  type DeliveryStatusFilter,
-  DELIVERY_STATUS_FILTER_OPTIONS,
-  ORDER_FILTER_ALL,
-  type OrderStatusFilter,
-  ORDER_STATUS_FILTER_OPTIONS,
-  type PaymentStatusFilter,
-  PAYMENT_STATUS_FILTER_OPTIONS,
-} from './orders-ui';
+  PRODUCT_FILTER_ALL,
+  PRODUCT_OWNER_TYPE_FILTER_OPTIONS,
+  type ProductOwnerTypeFilter,
+  PRODUCT_STATUS_FILTER_OPTIONS,
+  type ProductStatusFilter,
+  STOCK_STATUS_FILTER_OPTIONS,
+  type StockStatusFilter,
+} from './products-ui';
 
-type OrderListPanelProps = {
-  activeOrderId: string | null;
-  deliveryStatusFilter: DeliveryStatusFilter;
+type ProductListPanelProps = {
+  activeProductId: string | null;
   error: unknown;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   isPending: boolean;
   isRefetching: boolean;
-  onDeliveryStatusFilterChange: (status: DeliveryStatusFilter) => void;
-  onCreateStart: () => void;
   onLoadMore: () => void;
-  onOrderSelect: (orderId: string) => void;
-  onPaymentStatusFilterChange: (status: PaymentStatusFilter) => void;
+  onOwnerTypeFilterChange: (ownerType: ProductOwnerTypeFilter) => void;
+  onProductSelect: (productId: string) => void;
   onRefresh: () => void;
   onSearchChange: (search: string) => void;
-  onStatusFilterChange: (status: OrderStatusFilter) => void;
-  orders: Order[];
-  paymentStatusFilter: PaymentStatusFilter;
+  onStatusFilterChange: (status: ProductStatusFilter) => void;
+  onStockStatusFilterChange: (status: StockStatusFilter) => void;
+  onCreateStart: () => void;
+  ownerTypeFilter: ProductOwnerTypeFilter;
+  products: Product[];
   search: string;
-  statusFilter: OrderStatusFilter;
+  statusFilter: ProductStatusFilter;
+  stockStatusFilter: StockStatusFilter;
 };
 
 function buildSelectData(
@@ -71,27 +69,27 @@ function buildSelectData(
   }));
 }
 
-function OrderListContent({
-  activeOrderId,
+function ProductListContent({
+  activeProductId,
   error,
   hasNextPage,
   isFetchingNextPage,
   isPending,
   onLoadMore,
-  onOrderSelect,
-  orders,
+  onProductSelect,
+  products,
 }: Pick<
-  OrderListPanelProps,
-  | 'activeOrderId'
+  ProductListPanelProps,
+  | 'activeProductId'
   | 'error'
   | 'hasNextPage'
   | 'isFetchingNextPage'
   | 'isPending'
   | 'onLoadMore'
-  | 'onOrderSelect'
-  | 'orders'
+  | 'onProductSelect'
+  | 'products'
 >) {
-  const t = useTranslations('common.orders');
+  const t = useTranslations('common.products');
 
   if (isPending) {
     return (
@@ -109,22 +107,22 @@ function OrderListContent({
     );
   }
 
-  if (orders.length === 0) {
+  if (products.length === 0) {
     return (
-      <Alert color="gray" icon={<IconBriefcase size={18} />}>
-        {t('empty.noOrders')}
+      <Alert color="gray" icon={<IconPackage size={18} />}>
+        {t('empty.noProducts')}
       </Alert>
     );
   }
 
   return (
     <Stack gap="sm">
-      {orders.map((order) => (
-        <OrderRow
-          key={order.id}
-          isActive={activeOrderId === order.id}
-          onSelect={onOrderSelect}
-          order={order}
+      {products.map((product) => (
+        <ProductRow
+          key={product.id}
+          isActive={activeProductId === product.id}
+          onSelect={onProductSelect}
+          product={product}
         />
       ))}
 
@@ -143,34 +141,38 @@ function OrderListContent({
   );
 }
 
-export function OrderListPanel({
-  activeOrderId,
-  deliveryStatusFilter,
+export function ProductListPanel({
+  activeProductId,
   error,
   hasNextPage,
   isFetchingNextPage,
   isPending,
   isRefetching,
   onCreateStart,
-  onDeliveryStatusFilterChange,
   onLoadMore,
-  onOrderSelect,
-  onPaymentStatusFilterChange,
+  onOwnerTypeFilterChange,
+  onProductSelect,
   onRefresh,
   onSearchChange,
   onStatusFilterChange,
-  orders,
-  paymentStatusFilter,
+  onStockStatusFilterChange,
+  ownerTypeFilter,
+  products,
   search,
   statusFilter,
-}: OrderListPanelProps) {
-  const t = useTranslations('common.orders');
-  const paymentStatusOptions = useMemo(
-    () => buildSelectData(PAYMENT_STATUS_FILTER_OPTIONS, t),
+  stockStatusFilter,
+}: ProductListPanelProps) {
+  const t = useTranslations('common.products');
+  const statusOptions = useMemo(
+    () => buildSelectData(PRODUCT_STATUS_FILTER_OPTIONS, t),
     [t],
   );
-  const deliveryStatusOptions = useMemo(
-    () => buildSelectData(DELIVERY_STATUS_FILTER_OPTIONS, t),
+  const stockOptions = useMemo(
+    () => buildSelectData(STOCK_STATUS_FILTER_OPTIONS, t),
+    [t],
+  );
+  const ownerTypeOptions = useMemo(
+    () => buildSelectData(PRODUCT_OWNER_TYPE_FILTER_OPTIONS, t),
     [t],
   );
 
@@ -183,7 +185,7 @@ export function OrderListPanel({
               {t('list.title')}
             </Title>
             <Text c="dimmed" size="sm">
-              {t('list.loaded', { count: orders.length })}
+              {t('list.loaded', { count: products.length })}
             </Text>
           </Stack>
           <Group gap="xs">
@@ -199,54 +201,46 @@ export function OrderListPanel({
               leftSection={<IconPlus size={18} />}
               onClick={onCreateStart}
             >
-              {t('actions.newOrder')}
+              {t('actions.newProduct')}
             </Button>
           </Group>
         </Group>
 
-        <Tabs
-          onChange={(value) =>
-            onStatusFilterChange(
-              (value as OrderStatusFilter | null) ?? ORDER_FILTER_ALL,
-            )
-          }
-          value={statusFilter}
-          variant="outline"
-        >
-          <ScrollArea offsetScrollbars type="auto">
-            <Tabs.List style={{ flexWrap: 'nowrap', minWidth: 'max-content' }}>
-              {ORDER_STATUS_FILTER_OPTIONS.map((option) => (
-                <Tabs.Tab key={option.value} value={option.value}>
-                  {t(option.labelKey)}
-                </Tabs.Tab>
-              ))}
-            </Tabs.List>
-          </ScrollArea>
-        </Tabs>
-
         <Group align="flex-end" gap="sm" wrap="wrap">
           <Select
             allowDeselect={false}
-            data={paymentStatusOptions}
-            label={t('filters.paymentStatus')}
+            data={statusOptions}
+            label={t('filters.productStatus')}
             onChange={(value) =>
-              onPaymentStatusFilterChange(
-                (value as PaymentStatusFilter | null) ?? ORDER_FILTER_ALL,
+              onStatusFilterChange(
+                (value as ProductStatusFilter | null) ?? PRODUCT_FILTER_ALL,
               )
             }
-            value={paymentStatusFilter}
+            value={statusFilter}
             w={{ base: '100%', sm: 220 }}
           />
           <Select
             allowDeselect={false}
-            data={deliveryStatusOptions}
-            label={t('filters.deliveryStatus')}
+            data={stockOptions}
+            label={t('filters.stockStatus')}
             onChange={(value) =>
-              onDeliveryStatusFilterChange(
-                (value as DeliveryStatusFilter | null) ?? ORDER_FILTER_ALL,
+              onStockStatusFilterChange(
+                (value as StockStatusFilter | null) ?? PRODUCT_FILTER_ALL,
               )
             }
-            value={deliveryStatusFilter}
+            value={stockStatusFilter}
+            w={{ base: '100%', sm: 220 }}
+          />
+          <Select
+            allowDeselect={false}
+            data={ownerTypeOptions}
+            label={t('filters.ownerType')}
+            onChange={(value) =>
+              onOwnerTypeFilterChange(
+                (value as ProductOwnerTypeFilter | null) ?? PRODUCT_FILTER_ALL,
+              )
+            }
+            value={ownerTypeFilter}
             w={{ base: '100%', sm: 220 }}
           />
           <TextInput
@@ -255,19 +249,19 @@ export function OrderListPanel({
             onChange={(event) => onSearchChange(event.currentTarget.value)}
             placeholder={t('filters.searchPlaceholder')}
             value={search}
-            w={{ base: '100%', sm: 280 }}
+            w={{ base: '100%', sm: 300 }}
           />
         </Group>
 
-        <OrderListContent
-          activeOrderId={activeOrderId}
+        <ProductListContent
+          activeProductId={activeProductId}
           error={error}
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
           isPending={isPending}
           onLoadMore={onLoadMore}
-          onOrderSelect={onOrderSelect}
-          orders={orders}
+          onProductSelect={onProductSelect}
+          products={products}
         />
       </Stack>
     </Paper>

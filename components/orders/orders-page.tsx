@@ -21,12 +21,13 @@ import {
 import { notifications } from '@mantine/notifications';
 import { IconAlertTriangle, IconBriefcase } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import {
   getOrder,
   listOrders,
-  type ListOrdersParams,
+  updateOrder,
   updateOrderStatus,
 } from '@/lib/api/orders';
 import { getApiErrorMessage } from '@/lib/api/errors';
@@ -35,7 +36,18 @@ import type { Order, OrderStatus, Paginated } from '@/lib/api/types';
 import { useSessionStore } from '@/store/session';
 
 import { OrderDetailPanel } from './order-detail-panel';
+import { listOrderFormOptions } from './order-form-options';
+import {
+  OrderFormPanel,
+  type OrderFormMode,
+  type OrderFormValues,
+} from './order-form-panel';
 import { OrderListPanel } from './order-list-panel';
+import {
+  buildOrderParams,
+  buildUpdateOrderRequest,
+  type OrderFilters,
+} from './order-requests';
 import {
   type DeliveryStatusFilter,
   ORDER_FILTER_ALL,
@@ -43,53 +55,30 @@ import {
   type PaymentStatusFilter,
 } from './orders-ui';
 
-const ORDER_PAGE_LIMIT = 50;
-
-type OrderFilters = {
-  deliveryStatusFilter: DeliveryStatusFilter;
-  paymentStatusFilter: PaymentStatusFilter;
-  search: string;
-  statusFilter: OrderStatusFilter;
-};
-
 type UpdateOrderStatusVariables = {
   orderId: string;
   status: OrderStatus;
 };
 
-function buildOrderParams(
-  filters: OrderFilters,
-  cursor: string | null,
-): ListOrdersParams {
-  const params: ListOrdersParams = {
-    cursor,
-    limit: ORDER_PAGE_LIMIT,
-  };
+type UpdateOrderVariables = {
+  orderId: string;
+  values: OrderFormValues;
+};
 
-  if (filters.statusFilter !== ORDER_FILTER_ALL) {
-    params.status = filters.statusFilter;
-  }
-
-  if (filters.paymentStatusFilter !== ORDER_FILTER_ALL) {
-    params.paymentStatus = filters.paymentStatusFilter;
-  }
-
-  if (filters.deliveryStatusFilter !== ORDER_FILTER_ALL) {
-    params.deliveryStatus = filters.deliveryStatusFilter;
-  }
-
-  if (filters.search) {
-    params.search = filters.search;
-  }
-
-  return params;
-}
+const EMPTY_OPTIONS = {
+  agentContactOptions: [],
+  customerContactOptions: [],
+  merchantContactOptions: [],
+  productOptions: [],
+};
 
 export function OrdersPage() {
   const t = useTranslations('common.orders');
   const queryClient = useQueryClient();
+  const router = useRouter();
   const selectedTenantId = useSessionStore((state) => state.selectedTenantId);
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
+  const [formMode, setFormMode] = useState<OrderFormMode>('create');
   const [deliveryStatusFilter, setDeliveryStatusFilter] =
     useState<DeliveryStatusFilter>(ORDER_FILTER_ALL);
   const [paymentStatusFilter, setPaymentStatusFilter] =
@@ -134,6 +123,11 @@ export function OrdersPage() {
     },
     queryKey: ['order', selectedTenantId, activeOrderId],
   });
+  const formOptionsQuery = useQuery({
+    enabled: Boolean(selectedTenantId),
+    queryFn: listOrderFormOptions,
+    queryKey: ['orderFormOptions', selectedTenantId],
+  });
 
   const statusMutation = useMutation({
     mutationFn: async ({ orderId, status }: UpdateOrderStatusVariables) => {
@@ -161,29 +155,82 @@ export function OrdersPage() {
       });
     },
   });
+  const updateMutation = useMutation({
+    mutationFn: async ({ orderId, values }: UpdateOrderVariables) => {
+      await ensureCsrfToken();
+
+      return updateOrder(orderId, buildUpdateOrderRequest(values));
+    },
+    onError: (error) => {
+      notifications.show({
+        color: 'red',
+        message: getApiErrorMessage(error),
+        title: t('notifications.updateFailed'),
+      });
+    },
+    onSuccess: (order) => {
+      queryClient.setQueryData(['order', selectedTenantId, order.id], order);
+      setActiveOrderId(order.id);
+      setFormMode('create');
+      void queryClient.invalidateQueries({ queryKey: ['orders'] });
+      notifications.show({
+        color: 'green',
+        message: t('notifications.updateSuccessMessage', {
+          orderNumber: order.orderNumber,
+        }),
+        title: t('notifications.updateSuccessTitle'),
+      });
+    },
+  });
 
   const orders = useMemo(
     () => ordersQuery.data?.pages.flatMap((page) => page.items) ?? [],
     [ordersQuery.data],
   );
+  const formOptions = formOptionsQuery.data ?? EMPTY_OPTIONS;
+  const editingOrder = formMode === 'edit' ? (detailQuery.data ?? null) : null;
+
+  function resetSelectionForFilterChange() {
+    setActiveOrderId(null);
+    setFormMode('create');
+  }
+
+  function handleOrderSelect(orderId: string) {
+    setActiveOrderId(orderId);
+    setFormMode('create');
+  }
 
   function handleStatusFilterChange(nextStatus: OrderStatusFilter) {
     setStatusFilter(nextStatus);
-    setActiveOrderId(null);
+    resetSelectionForFilterChange();
   }
 
   function handlePaymentStatusFilterChange(nextStatus: PaymentStatusFilter) {
     setPaymentStatusFilter(nextStatus);
-    setActiveOrderId(null);
+    resetSelectionForFilterChange();
   }
 
   function handleDeliveryStatusFilterChange(nextStatus: DeliveryStatusFilter) {
     setDeliveryStatusFilter(nextStatus);
-    setActiveOrderId(null);
+    resetSelectionForFilterChange();
   }
 
   function handleOrderStatusChange(orderId: string, status: OrderStatus) {
     statusMutation.mutate({ orderId, status });
+  }
+
+  function handleFormSubmit(values: OrderFormValues) {
+    if (!editingOrder) {
+      notifications.show({
+        color: 'red',
+        message: t('errors.orderIdMissing'),
+        title: t('notifications.updateFailed'),
+      });
+
+      return;
+    }
+
+    updateMutation.mutate({ orderId: editingOrder.id, values });
   }
 
   if (!selectedTenantId) {
@@ -226,8 +273,9 @@ export function OrdersPage() {
             isPending={ordersQuery.isPending}
             isRefetching={ordersQuery.isRefetching}
             onDeliveryStatusFilterChange={handleDeliveryStatusFilterChange}
+            onCreateStart={() => router.push('/app/orders/new')}
             onLoadMore={() => void ordersQuery.fetchNextPage()}
-            onOrderSelect={setActiveOrderId}
+            onOrderSelect={handleOrderSelect}
             onPaymentStatusFilterChange={handlePaymentStatusFilterChange}
             onRefresh={() => void ordersQuery.refetch()}
             onSearchChange={setSearch}
@@ -240,13 +288,34 @@ export function OrdersPage() {
         </Grid.Col>
 
         <Grid.Col span={{ base: 12, xl: 5 }}>
-          <OrderDetailPanel
-            error={detailQuery.error}
-            isPending={detailQuery.isPending && Boolean(activeOrderId)}
-            isUpdatingStatus={statusMutation.isPending}
-            onStatusChange={handleOrderStatusChange}
-            order={detailQuery.data ?? null}
-          />
+          <Stack gap="md">
+            {formMode === 'edit' ? (
+              <OrderFormPanel
+                key={`edit-${editingOrder?.id ?? 'pending'}`}
+                agentContactOptions={formOptions.agentContactOptions}
+                customerContactOptions={formOptions.customerContactOptions}
+                isLoadingOptions={formOptionsQuery.isPending}
+                isSubmitting={updateMutation.isPending}
+                merchantContactOptions={formOptions.merchantContactOptions}
+                mode="edit"
+                onCancel={() => setFormMode('create')}
+                onSubmit={handleFormSubmit}
+                order={editingOrder}
+                productOptions={formOptions.productOptions}
+              />
+            ) : null}
+            <OrderDetailPanel
+              error={detailQuery.error}
+              isPending={detailQuery.isPending && Boolean(activeOrderId)}
+              isUpdatingStatus={statusMutation.isPending}
+              onEditStart={(order) => {
+                setActiveOrderId(order.id);
+                setFormMode('edit');
+              }}
+              onStatusChange={handleOrderStatusChange}
+              order={detailQuery.data ?? null}
+            />
+          </Stack>
         </Grid.Col>
       </Grid>
     </Stack>

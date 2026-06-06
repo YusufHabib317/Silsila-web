@@ -3,6 +3,7 @@
 import {
   Alert,
   Box,
+  Button,
   Code,
   Divider,
   Group,
@@ -14,8 +15,14 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { IconAlertTriangle, IconBriefcase } from '@tabler/icons-react';
+import {
+  IconAlertTriangle,
+  IconBriefcase,
+  IconEdit,
+  IconReceipt,
+} from '@tabler/icons-react';
 import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useMemo } from 'react';
 
 import { getApiErrorMessage } from '@/lib/api/errors';
@@ -35,6 +42,7 @@ type OrderDetailPanelProps = {
   error: unknown;
   isPending: boolean;
   isUpdatingStatus: boolean;
+  onEditStart: (order: Order) => void;
   onStatusChange: (orderId: string, status: OrderStatus) => void;
   order: Order | null;
 };
@@ -81,6 +89,7 @@ export function OrderDetailPanel({
   error,
   isPending,
   isUpdatingStatus,
+  onEditStart,
   onStatusChange,
   order,
 }: OrderDetailPanelProps) {
@@ -146,6 +155,24 @@ export function OrderDetailPanel({
               locale,
             )}
           </Text>
+        </Group>
+
+        <Group justify="flex-end">
+          <Button
+            component={Link}
+            href={`/app/commissions/new?orderId=${order.id}`}
+            leftSection={<IconReceipt size={18} />}
+            variant="light"
+          >
+            {t('actions.addCommission')}
+          </Button>
+          <Button
+            leftSection={<IconEdit size={18} />}
+            onClick={() => onEditStart(order)}
+            variant="light"
+          >
+            {t('actions.edit')}
+          </Button>
         </Group>
 
         <Group gap={6} wrap="wrap">

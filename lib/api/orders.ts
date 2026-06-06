@@ -2,11 +2,13 @@
 
 import { apiFetch } from './client';
 import type {
+  CreateOrderRequest,
   DeliveryStatus,
   Order,
   OrderStatus,
   Paginated,
   PaymentStatus,
+  UpdateOrderRequest,
   UpdateOrderStatusRequest,
 } from './types';
 
@@ -70,6 +72,20 @@ export function listOrders(params: ListOrdersParams = {}) {
 
 export function getOrder(orderId: string) {
   return apiFetch<Order>(`/orders/${orderId}`);
+}
+
+export function createOrder(body: CreateOrderRequest) {
+  return apiFetch<Order>('/orders', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+export function updateOrder(orderId: string, body: UpdateOrderRequest) {
+  return apiFetch<Order>(`/orders/${orderId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(body),
+  });
 }
 
 export function updateOrderStatus(orderId: string, status: OrderStatus) {

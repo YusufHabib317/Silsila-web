@@ -20,9 +20,15 @@ import {
   IconBrandWhatsapp,
   IconBriefcase,
   IconBuildingStore,
+  IconHistory,
   IconListCheck,
   IconLogout,
   IconMessageCircle,
+  IconPackage,
+  IconReceipt,
+  IconServer,
+  IconShieldCheck,
+  IconUsers,
 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -46,7 +52,10 @@ const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 const NAV_ITEMS = [
   { href: '/app', icon: IconBuildingStore, labelKey: 'dashboard' },
   { href: '/app/inbox', icon: IconMessageCircle, labelKey: 'inbox' },
+  { href: '/app/contacts', icon: IconUsers, labelKey: 'contacts' },
+  { href: '/app/products', icon: IconPackage, labelKey: 'products' },
   { href: '/app/orders', icon: IconBriefcase, labelKey: 'orders' },
+  { href: '/app/commissions', icon: IconReceipt, labelKey: 'commissions' },
   {
     href: '/app/settings/whatsapp',
     icon: IconBrandWhatsapp,
@@ -57,6 +66,12 @@ const NAV_ITEMS = [
     icon: IconListCheck,
     labelKey: 'tracking',
   },
+];
+
+const ADMIN_NAV_ITEMS = [
+  { href: '/admin/tenants', icon: IconShieldCheck, labelKey: 'adminTenants' },
+  { href: '/admin/audit-logs', icon: IconHistory, labelKey: 'auditLogs' },
+  { href: '/admin/system', icon: IconServer, labelKey: 'system' },
 ];
 
 function FullScreenState({ label }: { label: string }) {
@@ -89,6 +104,7 @@ export function ProtectedAppShell({
   const pathname = usePathname();
   const router = useRouter();
   const clearAuth = useSessionStore((state) => state.clearAuth);
+  const isPlatformAdmin = useSessionStore((state) => state.isPlatformAdmin);
   const selectedTenantId = useSessionStore((state) => state.selectedTenantId);
   const selectTenant = useSessionStore((state) => state.selectTenant);
   const status = useSessionStore((state) => state.status);
@@ -110,6 +126,7 @@ export function ProtectedAppShell({
   const selectedTenant = tenants.find(
     (tenant) => tenant.id === selectedTenantId,
   );
+  const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/');
   const isTenantSelectionRoute = pathname.endsWith('/app/select-tenant');
 
   useEffect(() => {
@@ -123,11 +140,33 @@ export function ProtectedAppShell({
       status === 'authenticated' &&
       tenants.length > 1 &&
       !selectedTenantId &&
+      !isAdminRoute &&
       !isTenantSelectionRoute
     ) {
       router.replace('/app/select-tenant');
     }
-  }, [isTenantSelectionRoute, router, selectedTenantId, status, tenants]);
+  }, [
+    isAdminRoute,
+    isTenantSelectionRoute,
+    router,
+    selectedTenantId,
+    status,
+    tenants,
+  ]);
+
+  useEffect(() => {
+    if (status === 'authenticated' && isAdminRoute && !isPlatformAdmin) {
+      router.replace('/app');
+    }
+  }, [isAdminRoute, isPlatformAdmin, router, status]);
+
+  function isNavItemActive(href: string) {
+    if (href === '/app') {
+      return pathname === href;
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
 
   function handleLocaleChange(value: string | null) {
     if (!value || value === locale) {
@@ -241,7 +280,7 @@ export function ProtectedAppShell({
             return (
               <NavLink
                 key={item.href}
-                active={pathname === item.href}
+                active={isNavItemActive(item.href)}
                 component={Link}
                 href={item.href}
                 label={t(`nav.${item.labelKey}`)}
@@ -250,6 +289,24 @@ export function ProtectedAppShell({
               />
             );
           })}
+          {isPlatformAdmin
+            ? ADMIN_NAV_ITEMS.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <NavLink
+                    key={item.href}
+                    active={isNavItemActive(item.href)}
+                    color="violet"
+                    component={Link}
+                    href={item.href}
+                    label={t(`nav.${item.labelKey}`)}
+                    leftSection={<Icon size={18} />}
+                    onClick={closeNavbar}
+                  />
+                );
+              })
+            : null}
         </Stack>
       </AppShell.Navbar>
 

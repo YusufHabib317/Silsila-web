@@ -64,6 +64,56 @@ export type Paginated<TItem> = {
   pageInfo: PageInfo;
 };
 
+export type ContactRole =
+  | 'merchant'
+  | 'agent'
+  | 'customer'
+  | 'supplier'
+  | 'factory'
+  | 'internal'
+  | 'unknown';
+
+export type ContactRoleAssignment = {
+  id: string;
+  role: ContactRole;
+  contextType: string | null;
+  contextId: string | null;
+  createdAt: string;
+};
+
+export type Contact = {
+  id: string;
+  displayName: string;
+  phoneNumber: string | null;
+  notes: string | null;
+  roles: ContactRoleAssignment[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateContactRequest = {
+  displayName: string;
+  notes?: string;
+  phoneNumber?: string;
+  roles?: ContactRole[];
+};
+
+export type UpdateContactRequest = {
+  displayName?: string;
+  notes?: string | null;
+  phoneNumber?: string | null;
+  roles?: ContactRole[];
+};
+
+export type {
+  CreateProductRequest,
+  Product,
+  ProductOwnerType,
+  ProductStatus,
+  StockStatus,
+  UpdateProductRequest,
+} from './product-types';
+
 export type OrderStatus =
   | 'new'
   | 'needs_review'
@@ -122,9 +172,54 @@ export type Order = {
   updatedAt: string;
 };
 
+export type OrderLineItemRequest = {
+  currency?: string;
+  productId?: string | null;
+  quantity?: number;
+  title: string;
+  unitAmountMinor?: number | null;
+};
+
+export type CreateOrderRequest = {
+  agentContactId?: string | null;
+  currency?: string;
+  customerContactId?: string | null;
+  deliveryStatus?: DeliveryStatus;
+  items: OrderLineItemRequest[];
+  merchantContactId?: string | null;
+  notes?: string | null;
+  orderNumber: string;
+  paymentStatus?: PaymentStatus;
+  sourceBundleId?: string | null;
+  status?: OrderStatus;
+};
+
+export type UpdateOrderRequest = {
+  agentContactId?: string | null;
+  currency?: string;
+  customerContactId?: string | null;
+  deliveryStatus?: DeliveryStatus;
+  items?: OrderLineItemRequest[];
+  merchantContactId?: string | null;
+  notes?: string | null;
+  orderNumber?: string;
+  paymentStatus?: PaymentStatus;
+  sourceBundleId?: string | null;
+  status?: OrderStatus;
+};
+
 export type UpdateOrderStatusRequest = {
   status: OrderStatus;
 };
+
+export type {
+  Commission,
+  CommissionRecordType,
+  CommissionStatus,
+  CommissionType,
+  CreateCommissionRequest,
+  UpdateCommissionRequest,
+} from './commission-types';
 
 export type WhatsappAccountStatus =
   | 'pending_qr'

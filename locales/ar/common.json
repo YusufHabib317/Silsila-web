@@ -9,15 +9,232 @@
     "logout": "تسجيل الخروج",
     "logoutFailed": "فشل طلب تسجيل الخروج",
     "nav": {
+      "adminTenants": "Admin Tenants",
+      "auditLogs": "Audit Logs",
+      "system": "System",
+      "commissions": "العمولات",
+      "contacts": "جهات الاتصال",
       "dashboard": "لوحة التحكم",
       "inbox": "الوارد",
       "orders": "الطلبات",
+      "products": "المنتجات",
       "tracking": "التتبع",
       "whatsapp": "واتساب"
     },
     "openingSignIn": "جار فتح تسجيل الدخول",
     "tenant": "المتجر",
     "toggleNavigation": "تبديل التنقل"
+  },
+  "contacts": {
+    "actions": {
+      "cancel": "إلغاء",
+      "create": "إنشاء جهة اتصال",
+      "edit": "تعديل",
+      "loadMore": "تحميل المزيد",
+      "newContact": "جهة اتصال جديدة",
+      "refresh": "تحديث",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "contact": {
+      "moreRoles": "+{count, plural, one {# دور} other {# أدوار}}",
+      "noPhone": "لا يوجد رقم هاتف",
+      "notAvailable": "غير متاح"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "detail": {
+      "contactId": "معرف جهة الاتصال",
+      "createdAt": "أنشئت في",
+      "empty": "اختر جهة اتصال لعرض التفاصيل.",
+      "globalRole": "دور عام",
+      "noRoleContexts": "لا توجد سياقات أدوار معينة.",
+      "notes": "ملاحظات",
+      "phoneNumber": "رقم الهاتف",
+      "roleContexts": "سياقات الأدوار",
+      "updatedAt": "حدثت في"
+    },
+    "empty": {
+      "noContacts": "لا توجد جهات اتصال تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل فتح جهات الاتصال."
+    },
+    "errors": {
+      "contactIdMissing": "معرف جهة الاتصال مفقود"
+    },
+    "filters": {
+      "allRoles": "كل الأدوار",
+      "role": "الدور",
+      "search": "بحث",
+      "searchPlaceholder": "الاسم أو الهاتف أو الملاحظات"
+    },
+    "form": {
+      "createTitle": "إنشاء جهة اتصال",
+      "displayNameLabel": "اسم العرض",
+      "displayNamePlaceholder": "اسم التاجر أو الوكيل أو العميل",
+      "displayNameRequired": "اسم العرض مطلوب",
+      "displayNameTooLong": "يجب ألا يتجاوز اسم العرض 120 حرفا",
+      "editTitle": "تعديل جهة الاتصال",
+      "invalidPhoneNumber": "أدخل رقم هاتف صالحا",
+      "notesLabel": "ملاحظات",
+      "notesPlaceholder": "تفاصيل الدور أو المصدر أو التوصيل",
+      "notesTooLong": "يجب ألا تتجاوز الملاحظات 1000 حرف",
+      "phoneNumberLabel": "رقم الهاتف",
+      "phoneNumberPlaceholder": "+963 ...",
+      "rolesLabel": "الأدوار",
+      "rolesPlaceholder": "اختر أدوار جهة الاتصال"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "جهات الاتصال"
+    },
+    "notifications": {
+      "createFailed": "فشل إنشاء جهة الاتصال",
+      "createSuccessMessage": "تمت إضافة {name} إلى جهات الاتصال.",
+      "createSuccessTitle": "تم إنشاء جهة الاتصال",
+      "updateFailed": "فشل تحديث جهة الاتصال",
+      "updateSuccessMessage": "تم تحديث {name}.",
+      "updateSuccessTitle": "تم تحديث جهة الاتصال"
+    },
+    "page": {
+      "badge": "جهات اتصال المتجر",
+      "subtitle": "إدارة التجار والوكلاء والعملاء والموردين وأدوار العمل المرنة.",
+      "title": "جهات الاتصال"
+    },
+    "role": {
+      "agent": "وكيل",
+      "customer": "عميل",
+      "factory": "مصنع",
+      "internal": "داخلي",
+      "merchant": "تاجر",
+      "supplier": "مورد",
+      "unknown": "غير معروف"
+    }
+  },
+  "products": {
+    "actions": {
+      "addCommission": "إضافة عمولة",
+      "cancel": "إلغاء",
+      "create": "إنشاء منتج",
+      "edit": "تعديل",
+      "loadMore": "تحميل المزيد",
+      "newProduct": "منتج جديد",
+      "refresh": "تحديث",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "createPage": {
+      "subtitle": "أنشئ سجل منتج بعد المراجعة من سياق واتساب أو مصدر يدوي أو مخزون داخلي.",
+      "title": "منتج جديد"
+    },
+    "detail": {
+      "agentAmount": "سعر الوكيل",
+      "categoryId": "معرف التصنيف",
+      "costAmount": "سعر التكلفة",
+      "createdByUserId": "أنشئ بواسطة",
+      "currency": "العملة",
+      "description": "الوصف",
+      "empty": "اختر منتجا لعرض التفاصيل.",
+      "merchantContactId": "معرف جهة اتصال التاجر",
+      "notes": "ملاحظات",
+      "ownerContactId": "معرف جهة اتصال المالك",
+      "productId": "معرف المنتج",
+      "saleAmount": "سعر البيع",
+      "sourceBundleId": "معرف حزمة المصدر",
+      "updatedAt": "حدث في"
+    },
+    "empty": {
+      "noProducts": "لا توجد منتجات تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل فتح المنتجات."
+    },
+    "errors": {
+      "productIdMissing": "معرف المنتج مفقود"
+    },
+    "filters": {
+      "allOwnerTypes": "كل أنواع الملكية",
+      "allProductStatuses": "كل حالات المنتج",
+      "allStockStatuses": "كل حالات المخزون",
+      "ownerType": "نوع الملكية",
+      "productStatus": "الحالة",
+      "search": "بحث",
+      "searchPlaceholder": "الاسم أو الوصف أو الملاحظات",
+      "stockStatus": "المخزون"
+    },
+    "form": {
+      "agentAmountLabel": "سعر الوكيل",
+      "amountPlaceholder": "0.00",
+      "categoryIdLabel": "معرف التصنيف",
+      "contactPlaceholder": "اختر جهة اتصال",
+      "costAmountLabel": "سعر التكلفة",
+      "createTitle": "إنشاء منتج",
+      "currencyLabel": "العملة",
+      "currencyPlaceholder": "SYP",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "تفاصيل المنتج أو المقاسات أو الألوان أو ملاحظات المصدر",
+      "descriptionTooLong": "يجب ألا يتجاوز الوصف 2000 حرف",
+      "editTitle": "تعديل المنتج",
+      "invalidAmount": "استخدم رقما موجبا مع منزلتين عشريتين كحد أقصى",
+      "invalidCurrency": "يجب أن تكون العملة رمزا من 3 أحرف",
+      "merchantContactLabel": "التاجر",
+      "nameLabel": "اسم المنتج",
+      "namePlaceholder": "فستان صيفي أو طقم مطبخ أو مجموعة عطور",
+      "nameRequired": "اسم المنتج مطلوب",
+      "nameTooLong": "يجب ألا يتجاوز اسم المنتج 160 حرفا",
+      "notesLabel": "ملاحظات",
+      "notesPlaceholder": "ملاحظات داخلية أو مجموعة المصدر أو سياق العمولة",
+      "notesTooLong": "يجب ألا تتجاوز الملاحظات 1000 حرف",
+      "optionalIdPlaceholder": "معرف خلفية اختياري",
+      "ownerContactLabel": "جهة اتصال المالك",
+      "ownerTypeLabel": "نوع الملكية",
+      "productStatusLabel": "حالة المنتج",
+      "saleAmountLabel": "سعر البيع",
+      "sourceBundleIdLabel": "معرف حزمة المصدر",
+      "stockStatusLabel": "حالة المخزون"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "المنتجات"
+    },
+    "notifications": {
+      "createFailed": "فشل إنشاء المنتج",
+      "createSuccessMessage": "تمت إضافة {name} إلى المنتجات.",
+      "createSuccessTitle": "تم إنشاء المنتج",
+      "updateFailed": "فشل تحديث المنتج",
+      "updateSuccessMessage": "تم تحديث {name}.",
+      "updateSuccessTitle": "تم تحديث المنتج"
+    },
+    "ownerType": {
+      "agent_product": "منتج وكيل",
+      "factory_product": "منتج مصنع",
+      "merchant_product": "منتج تاجر",
+      "own_stock": "مخزون خاص",
+      "unknown": "غير معروف"
+    },
+    "page": {
+      "badge": "منتجات المتجر",
+      "subtitle": "تتبع المنتجات والملكية والأسعار وحالة المخزون وروابط التجار.",
+      "title": "المنتجات"
+    },
+    "product": {
+      "noDescription": "لا يوجد وصف",
+      "notAvailable": "غير متاح"
+    },
+    "status": {
+      "active": "نشط",
+      "archived": "مؤرشف",
+      "deleted": "محذوف",
+      "draft": "مسودة",
+      "out_of_stock": "نفد المخزون",
+      "paused": "متوقف",
+      "price_changed": "تغير السعر"
+    },
+    "stockStatus": {
+      "in_stock": "متوفر",
+      "low_stock": "مخزون منخفض",
+      "out_of_stock": "نفد المخزون",
+      "unknown": "غير معروف"
+    }
   },
   "inbox": {
     "account": {
@@ -112,8 +329,20 @@
   },
   "orders": {
     "actions": {
+      "addCommission": "إضافة عمولة",
+      "addItem": "إضافة بند",
+      "cancel": "إلغاء",
+      "create": "إنشاء طلب",
+      "edit": "تعديل",
       "loadMore": "تحميل المزيد",
-      "refresh": "تحديث"
+      "newOrder": "طلب جديد",
+      "refresh": "تحديث",
+      "removeItem": "حذف البند",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "createPage": {
+      "subtitle": "أنشئ طلبا يدويا مع جهات الاتصال وبنود المنتجات وحالة الدفع وإعدادات التسليم.",
+      "title": "طلب جديد"
     },
     "date": {
       "never": "أبدا"
@@ -164,14 +393,56 @@
       "search": "بحث",
       "searchPlaceholder": "رقم الطلب أو الملاحظات"
     },
+    "form": {
+      "agentContactLabel": "الوكيل",
+      "amountPlaceholder": "0.00",
+      "contactPlaceholder": "اختر جهة اتصال",
+      "createTitle": "إنشاء طلب",
+      "currencyLabel": "العملة",
+      "currencyPlaceholder": "SYP",
+      "customerContactLabel": "العميل",
+      "deliveryStatusLabel": "حالة التسليم",
+      "editTitle": "تعديل الطلب",
+      "invalidAmount": "استخدم رقما موجبا مع منزلتين عشريتين كحد أقصى",
+      "invalidCurrency": "يجب أن تكون العملة رمزا من 3 أحرف",
+      "invalidQuantity": "استخدم كمية أكبر من 0",
+      "itemTitleLabel": "العنوان",
+      "itemTitlePlaceholder": "منتج أو مجموعة أو خدمة",
+      "itemTitleRequired": "عنوان البند مطلوب",
+      "itemTitleTooLong": "يجب ألا يتجاوز عنوان البند 200 حرف",
+      "lineItemsSummary": "{count, plural, one {# بند} other {# بنود}}",
+      "lineItemsTitle": "بنود الطلب",
+      "merchantContactLabel": "التاجر",
+      "notesLabel": "ملاحظات",
+      "notesPlaceholder": "تفاصيل التسليم أو سياق الدفع أو ملاحظات داخلية",
+      "notesTooLong": "يجب ألا تتجاوز الملاحظات 1000 حرف",
+      "optionalIdPlaceholder": "معرف خلفية اختياري",
+      "orderNumberLabel": "رقم الطلب",
+      "orderNumberPlaceholder": "ORD-20260606-001",
+      "orderNumberRequired": "رقم الطلب مطلوب",
+      "orderNumberTooLong": "يجب ألا يتجاوز رقم الطلب 80 حرفا",
+      "paymentStatusLabel": "حالة الدفع",
+      "productLabel": "المنتج",
+      "productPlaceholder": "اختر منتجا",
+      "quantityLabel": "الكمية",
+      "sourceBundleIdLabel": "معرف حزمة المصدر",
+      "statusLabel": "حالة الطلب",
+      "unitAmountLabel": "سعر الوحدة"
+    },
     "list": {
       "loaded": "تم تحميل {count}",
       "title": "الطلبات"
     },
     "notifications": {
+      "createFailed": "فشل إنشاء الطلب",
+      "createSuccessMessage": "تم إنشاء الطلب {orderNumber}.",
+      "createSuccessTitle": "تم إنشاء الطلب",
       "statusUpdateFailed": "فشل تحديث الطلب",
       "statusUpdateSuccessMessage": "تم نقل الطلب {orderNumber} إلى {status}.",
-      "statusUpdateSuccessTitle": "تم تحديث الطلب"
+      "statusUpdateSuccessTitle": "تم تحديث الطلب",
+      "updateFailed": "فشل تحديث الطلب",
+      "updateSuccessMessage": "تم تحديث الطلب {orderNumber}.",
+      "updateSuccessTitle": "تم تحديث الطلب"
     },
     "order": {
       "itemCount": "{count, plural, one {# بند} other {# بنود}}",
@@ -201,6 +472,266 @@
       "preparing": "قيد التحضير",
       "returned": "مرتجع",
       "shipped": "تم الشحن"
+    }
+  },
+  "commissions": {
+    "actions": {
+      "cancel": "إلغاء",
+      "create": "إنشاء عمولة",
+      "edit": "تعديل",
+      "loadMore": "تحميل المزيد",
+      "newCommission": "عمولة جديدة",
+      "refresh": "تحديث",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "commission": {
+      "notAvailable": "غير متاح"
+    },
+    "createPage": {
+      "subtitle": "اربط وكيلا أو تاجرا أو دفعة يدوية بطلب أو منتج أو كليهما.",
+      "title": "عمولة جديدة"
+    },
+    "date": {
+      "never": "أبدا"
+    },
+    "detail": {
+      "amount": "المبلغ",
+      "commissionId": "معرف العمولة",
+      "contact": "جهة الاتصال",
+      "contactId": "معرف جهة الاتصال",
+      "currency": "العملة",
+      "empty": "اختر عمولة لعرض التفاصيل.",
+      "order": "الطلب",
+      "orderId": "معرف الطلب",
+      "paidAt": "دفعت في",
+      "percentage": "النسبة",
+      "product": "المنتج",
+      "productId": "معرف المنتج",
+      "updatedAt": "حدثت في"
+    },
+    "empty": {
+      "noCommissions": "لا توجد عمولات تطابق هذا العرض.",
+      "selectTenant": "اختر متجرا قبل فتح العمولات."
+    },
+    "errors": {
+      "commissionIdMissing": "معرف العمولة مفقود"
+    },
+    "filters": {
+      "allContacts": "كل جهات الاتصال",
+      "allOrders": "كل الطلبات",
+      "allProducts": "كل المنتجات",
+      "allStatuses": "كل العمولات",
+      "allTypes": "كل أنواع العمولات",
+      "contact": "جهة الاتصال",
+      "currency": "العملة",
+      "currencyPlaceholder": "SYP",
+      "order": "الطلب",
+      "product": "المنتج",
+      "type": "النوع"
+    },
+    "form": {
+      "amountLabel": "المبلغ",
+      "amountPlaceholder": "0.00",
+      "amountRequired": "المبلغ مطلوب للعمولات اليدوية والثابتة",
+      "contactLabel": "جهة الاتصال",
+      "contactPlaceholder": "اختر جهة اتصال",
+      "contactRequired": "جهة الاتصال مطلوبة",
+      "createTitle": "إنشاء عمولة",
+      "currencyLabel": "العملة",
+      "currencyPlaceholder": "SYP",
+      "editTitle": "تعديل العمولة",
+      "invalidAmount": "استخدم رقما بمنزلتين عشريتين كحد أقصى",
+      "invalidCurrency": "يجب أن تكون العملة رمزا من 3 أحرف",
+      "invalidPercentage": "استخدم نسبة بمنزلتين عشريتين كحد أقصى",
+      "orderLabel": "الطلب",
+      "orderPlaceholder": "اختر طلبا",
+      "paidAtLabel": "دفعت في",
+      "percentageLabel": "النسبة",
+      "percentagePlaceholder": "10.00",
+      "percentageRequired": "النسبة مطلوبة لعمولات النسبة",
+      "productLabel": "المنتج",
+      "productPlaceholder": "اختر منتجا",
+      "statusLabel": "الحالة",
+      "typeLabel": "نوع العمولة"
+    },
+    "list": {
+      "loaded": "تم تحميل {count}",
+      "title": "العمولات"
+    },
+    "notifications": {
+      "createFailed": "فشل إنشاء العمولة",
+      "createSuccessMessage": "تم إنشاء العمولة.",
+      "createSuccessTitle": "تم إنشاء العمولة",
+      "updateFailed": "فشل تحديث العمولة",
+      "updateSuccessMessage": "تم تحديث العمولة.",
+      "updateSuccessTitle": "تم تحديث العمولة"
+    },
+    "page": {
+      "badge": "عمولات المتجر",
+      "subtitle": "تتبع قواعد الدفع ومبالغ العمولات وحالة الموافقة والسجلات المدفوعة.",
+      "title": "العمولات"
+    },
+    "status": {
+      "approved": "معتمدة",
+      "cancelled": "ملغاة",
+      "paid": "مدفوعة",
+      "pending": "قيد الانتظار"
+    },
+    "type": {
+      "fixed_amount": "مبلغ ثابت",
+      "manual": "يدوية",
+      "percentage": "نسبة",
+      "unknown": "غير معروف"
+    }
+  },
+  "admin": {
+    "access": {
+      "denied": "Platform admin access is required.",
+      "loading": "Checking admin access"
+    },
+    "actions": {
+      "backToTenants": "Back to tenants",
+      "loadMore": "Load more",
+      "refresh": "Refresh",
+      "view": "View"
+    },
+    "auditLogs": {
+      "list": {
+        "loaded": "{count} loaded",
+        "title": "Audit events"
+      },
+      "notAvailable": "Not available",
+      "page": {
+        "badge": "Platform audit",
+        "subtitle": "Inspect platform and tenant-scoped activity by actor, action, and entity.",
+        "title": "Audit Logs"
+      },
+      "systemActor": "System",
+      "table": {
+        "actor": "Actor",
+        "created": "Created",
+        "entity": "Entity",
+        "event": "Event",
+        "metadata": "Metadata",
+        "tenant": "Tenant"
+      }
+    },
+    "date": {
+      "never": "Never"
+    },
+    "empty": {
+      "noAuditLogs": "No audit logs match this view.",
+      "noTenants": "No tenants match this view."
+    },
+    "filters": {
+      "action": "Action",
+      "actionPlaceholder": "tenant.updated",
+      "actorUserId": "Actor user id",
+      "allPlans": "All plans",
+      "allStatuses": "All statuses",
+      "entityType": "Entity type",
+      "entityTypePlaceholder": "tenant",
+      "idPlaceholder": "Exact id",
+      "plan": "Plan",
+      "search": "Search",
+      "status": "Status",
+      "tenantId": "Tenant id",
+      "tenantSearchPlaceholder": "Name or slug"
+    },
+    "system": {
+      "breakdown": {
+        "tenants": "Tenants by status",
+        "whatsappAccounts": "WhatsApp accounts by status"
+      },
+      "health": {
+        "api": "API",
+        "checkedAt": "Checked at",
+        "cleanupWorker": "Cleanup worker",
+        "configured": "Configured",
+        "notConfigured": "Not configured",
+        "r2": "R2 storage",
+        "title": "System health",
+        "whatsappWorker": "WhatsApp worker"
+      },
+      "metrics": {
+        "checkedAt": "Metrics checked at",
+        "expiredPendingDeletion": "Expired pending deletion",
+        "receivedToday": "Messages received today",
+        "temporaryStorage": "Temporary storage",
+        "tenants": "Tenants",
+        "trackedToday": "Tracked today",
+        "whatsappAccounts": "WhatsApp accounts"
+      },
+      "page": {
+        "badge": "Platform health",
+        "subtitle": "Monitor tenant totals, WhatsApp account states, message ingestion, storage, and worker health.",
+        "title": "System"
+      }
+    },
+    "tenantDetail": {
+      "counts": {
+        "activeUsers": "Active users",
+        "orders": "Orders",
+        "products": "Products",
+        "temporaryMediaObjects": "Temporary media",
+        "untrackedMessagesPendingDeletion": "Untracked pending deletion",
+        "whatsappAccounts": "WhatsApp accounts"
+      },
+      "page": {
+        "badge": "Tenant detail",
+        "subtitle": "Review tenant membership, WhatsApp account status, and commerce counts."
+      },
+      "summary": {
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "users": {
+        "created": "Created",
+        "empty": "No users are attached to this tenant.",
+        "role": "Role",
+        "status": "Status",
+        "title": "Users",
+        "user": "User"
+      },
+      "whatsapp": {
+        "account": "Account",
+        "connected": "Last connected",
+        "created": "Created",
+        "empty": "No WhatsApp accounts are attached to this tenant.",
+        "status": "Status",
+        "title": "WhatsApp accounts",
+        "unnamed": "Unnamed account"
+      }
+    },
+    "tenantPlan": {
+      "enterprise": "Enterprise",
+      "free": "Free",
+      "pro": "Pro",
+      "starter": "Starter"
+    },
+    "tenantStatus": {
+      "active": "Active",
+      "deleted": "Deleted",
+      "disabled": "Disabled",
+      "trial": "Trial"
+    },
+    "tenants": {
+      "list": {
+        "loaded": "{count} loaded",
+        "title": "Tenants"
+      },
+      "page": {
+        "badge": "Platform admin",
+        "subtitle": "Inspect tenant status, plans, and operational counts across the platform.",
+        "title": "Tenants"
+      },
+      "table": {
+        "actions": "Actions",
+        "plan": "Plan",
+        "status": "Status",
+        "tenant": "Tenant",
+        "updated": "Updated"
+      }
     }
   },
   "tracking": {
