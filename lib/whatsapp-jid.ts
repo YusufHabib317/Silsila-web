@@ -76,7 +76,9 @@ export function formatPhoneNumber(
 
 // Last-resort display when there is no human name and no phone: drop the
 // opaque `@domain` so we at least don't show the full raw JID.
-export function stripJidDomain(value: string | null | undefined): string | null {
+export function stripJidDomain(
+  value: string | null | undefined,
+): string | null {
   if (!value) {
     return null;
   }

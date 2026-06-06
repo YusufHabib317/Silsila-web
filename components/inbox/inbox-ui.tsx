@@ -63,9 +63,7 @@ export function getMessageChatLabel(
   );
 }
 
-export function getMessageSenderPhone(
-  message: WhatsappMessage,
-): string | null {
+export function getMessageSenderPhone(message: WhatsappMessage): string | null {
   if (message.isFromMe) {
     return null;
   }

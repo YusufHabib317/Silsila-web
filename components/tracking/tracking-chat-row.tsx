@@ -43,14 +43,16 @@ import {
 } from './tracking-ui';
 import { formatDate } from '@/components/whatsapp/whatsapp-ui';
 
-const CHAT_KIND_ICON: Record<WhatsappChatKind, ComponentType<{ size?: number }>> =
-  {
-    direct: IconUser,
-    group: IconUsersGroup,
-    channel: IconSpeakerphone,
-    broadcast: IconSpeakerphone,
-    unknown: IconMessageCircle,
-  };
+const CHAT_KIND_ICON: Record<
+  WhatsappChatKind,
+  ComponentType<{ size?: number }>
+> = {
+  direct: IconUser,
+  group: IconUsersGroup,
+  channel: IconSpeakerphone,
+  broadcast: IconSpeakerphone,
+  unknown: IconMessageCircle,
+};
 
 type TrackingChatRowProps = {
   accountLabel: string;
@@ -124,7 +126,12 @@ export function TrackingChatRow({
     <Table.Tr>
       <Table.Td>
         <Group align="flex-start" gap="sm" wrap="nowrap">
-          <ThemeIcon color={kindMeta.color} radius="sm" size="lg" variant="light">
+          <ThemeIcon
+            color={kindMeta.color}
+            radius="sm"
+            size="lg"
+            variant="light"
+          >
             <KindIcon size={18} />
           </ThemeIcon>
           <Stack gap={4} miw={0}>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 'use client';
 
 import { Badge, Box, Group, Stack, Text, UnstyledButton } from '@mantine/core';
