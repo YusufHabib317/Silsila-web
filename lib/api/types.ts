@@ -81,12 +81,23 @@ export type ContactRoleAssignment = {
   createdAt: string;
 };
 
+export type ContactWhatsappIdentity = {
+  id: string;
+  whatsappContactId: string;
+  whatsappAccountId: string;
+  externalContactId: string;
+  phoneNumber: string | null;
+  displayName: string | null;
+  createdAt: string;
+};
+
 export type Contact = {
   id: string;
   displayName: string;
   phoneNumber: string | null;
   notes: string | null;
   roles: ContactRoleAssignment[];
+  whatsappIdentities: ContactWhatsappIdentity[];
   createdAt: string;
   updatedAt: string;
 };
@@ -96,6 +107,7 @@ export type CreateContactRequest = {
   notes?: string;
   phoneNumber?: string;
   roles?: ContactRole[];
+  whatsappExternalContactIds?: string[];
 };
 
 export type UpdateContactRequest = {
@@ -103,6 +115,7 @@ export type UpdateContactRequest = {
   notes?: string | null;
   phoneNumber?: string | null;
   roles?: ContactRole[];
+  whatsappExternalContactIds?: string[];
 };
 
 export type {
@@ -221,115 +234,19 @@ export type {
   UpdateCommissionRequest,
 } from './commission-types';
 
-export type WhatsappAccountStatus =
-  | 'pending_qr'
-  | 'qr_ready'
-  | 'connecting'
-  | 'connected'
-  | 'disconnected'
-  | 'reconnecting'
-  | 'expired'
-  | 'failed'
-  | 'disabled';
-
-export type WhatsappAccount = {
-  id: string;
-  phoneNumber: string | null;
-  displayName: string | null;
-  status: WhatsappAccountStatus;
-  lastConnectedAt: string | null;
-  lastDisconnectedAt: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type WhatsappAccountDetail = WhatsappAccount & {
-  qrAvailable: boolean;
-  qrCode: string | null;
-  qrExpiresAt: string | null;
-};
-
-export type CreateWhatsappAccountRequest = {
-  phoneNumber?: string | null;
-  displayName?: string | null;
-};
-
-export type WhatsappSourceType =
-  | 'merchant_group'
-  | 'agent_group'
-  | 'customer_chat'
-  | 'supplier_chat'
-  | 'internal_team'
-  | 'unknown';
-
-export type TrackedSourceStatus = 'tracked' | 'ignored' | 'personal';
-
-export type TrackedSource = {
-  id: string;
-  status: TrackedSourceStatus;
-  sourceType: WhatsappSourceType;
-  createdByUserId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type WhatsappChat = {
-  id: string;
-  whatsappAccountId: string;
-  externalChatId: string;
-  displayName: string | null;
-  sourceType: WhatsappSourceType;
-  tracking: TrackedSource | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateTrackedSourceRequest = {
-  status: TrackedSourceStatus;
-  sourceType?: WhatsappSourceType;
-};
-
-export type WhatsappMessageType =
-  | 'text'
-  | 'image'
-  | 'video'
-  | 'audio'
-  | 'voice'
-  | 'document'
-  | 'sticker'
-  | 'location'
-  | 'contact'
-  | 'unknown';
-
-export type WhatsappMessageChat = {
-  externalChatId: string;
-  displayName: string | null;
-};
-
-export type WhatsappMessageSender = {
-  externalContactId: string;
-  phoneNumber: string | null;
-  displayName: string | null;
-};
-
-export type WhatsappMessage = {
-  id: string;
-  whatsappAccountId: string;
-  chatId: string;
-  senderContactId: string | null;
-  externalMessageId: string;
-  messageType: WhatsappMessageType;
-  bodyText: string | null;
-  isFromMe: boolean;
-  isTracked: boolean;
-  isLinked: boolean;
-  isArchived: boolean;
-  isPersonal: boolean;
-  isTemporary: boolean;
-  expiresAt: string;
-  receivedAt: string;
-  createdAt: string;
-  updatedAt: string;
-  chat: WhatsappMessageChat | null;
-  sender: WhatsappMessageSender | null;
-};
+export type {
+  CreateWhatsappAccountRequest,
+  TrackedSource,
+  TrackedSourceStatus,
+  UpdateTrackedSourceRequest,
+  WhatsappAccount,
+  WhatsappAccountDetail,
+  WhatsappAccountStatus,
+  WhatsappChat,
+  WhatsappMessage,
+  WhatsappMessageChat,
+  WhatsappMessageLinkedContact,
+  WhatsappMessageSender,
+  WhatsappMessageType,
+  WhatsappSourceType,
+} from './whatsapp-types';

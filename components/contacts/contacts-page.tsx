@@ -223,6 +223,9 @@ export function ContactsPage() {
                 setActiveContactId(contact.id);
                 setFormMode('edit');
               }}
+              onOpenProfile={(contact) =>
+                router.push(`/app/contacts/${contact.id}`)
+              }
             />
           </Stack>
         </Grid.Col>

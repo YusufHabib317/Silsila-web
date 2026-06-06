@@ -27,11 +27,13 @@
   },
   "contacts": {
     "actions": {
+      "backToContacts": "Back to contacts",
       "cancel": "Cancel",
       "create": "Create contact",
       "edit": "Edit",
       "loadMore": "Load more",
       "newContact": "New contact",
+      "openProfile": "Open profile",
       "refresh": "Refresh",
       "saveChanges": "Save changes"
     },
@@ -49,10 +51,12 @@
       "empty": "Select a contact to inspect details.",
       "globalRole": "Global role",
       "noRoleContexts": "No role contexts are assigned.",
+      "noWhatsappIdentities": "No WhatsApp sender identities are linked.",
       "notes": "Notes",
       "phoneNumber": "Phone number",
       "roleContexts": "Role contexts",
-      "updatedAt": "Updated at"
+      "updatedAt": "Updated at",
+      "whatsappIdentities": "WhatsApp identities"
     },
     "empty": {
       "noContacts": "No contacts match this view.",
@@ -81,7 +85,10 @@
       "phoneNumberLabel": "Phone number",
       "phoneNumberPlaceholder": "+963 ...",
       "rolesLabel": "Roles",
-      "rolesPlaceholder": "Choose contact roles"
+      "rolesPlaceholder": "Choose contact roles",
+      "whatsappIdsLabel": "WhatsApp sender ids",
+      "whatsappIdsPlaceholder": "236975239991464@lid",
+      "whatsappIdsTooLong": "WhatsApp sender ids must be 500 characters or fewer"
     },
     "list": {
       "loaded": "{count} loaded",
@@ -99,6 +106,12 @@
       "badge": "Tenant contacts",
       "subtitle": "Manage merchants, agents, customers, suppliers, and flexible business roles.",
       "title": "Contacts"
+    },
+    "profile": {
+      "contactBadge": "Contact profile",
+      "messagesTitle": "WhatsApp messages",
+      "noMessages": "No WhatsApp messages are linked to this contact.",
+      "subtitle": "Review contact details, linked WhatsApp identities, and related message history."
     },
     "role": {
       "agent": "Agent",
@@ -256,6 +269,8 @@
       "messageId": "Message id",
       "rawPayloadHidden": "Raw WhatsApp payload JSON is not exposed in this inbox.",
       "receivedAt": "Received at",
+      "linkedContact": "Contact",
+      "senderExternalId": "Sender WhatsApp id",
       "senderPhone": "Sender phone"
     },
     "empty": {

@@ -62,6 +62,8 @@ export function getMessageSenderLabel(
   }
 
   return (
+    message.linkedContact?.displayName ??
+    message.linkedContact?.phoneNumber ??
     message.sender?.displayName ??
     message.sender?.phoneNumber ??
     message.sender?.externalContactId ??

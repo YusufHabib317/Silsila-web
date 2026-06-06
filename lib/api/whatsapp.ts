@@ -34,6 +34,7 @@ export type ListWhatsappChatsParams = {
 
 export type ListWhatsappMessagesParams = {
   chatId?: string;
+  contactId?: string;
   cursor?: string | null;
   isArchived?: BooleanQueryValue;
   isLinked?: BooleanQueryValue;
@@ -117,6 +118,10 @@ function buildMessageQueryString(params: ListWhatsappMessagesParams) {
 
   if (params.chatId) {
     searchParams.set('chatId', params.chatId);
+  }
+
+  if (params.contactId) {
+    searchParams.set('contactId', params.contactId);
   }
 
   if (params.senderContactId) {

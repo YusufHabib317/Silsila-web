@@ -17,6 +17,7 @@ import {
 import {
   IconAlertTriangle,
   IconEdit,
+  IconExternalLink,
   IconPhone,
   IconUsers,
 } from '@tabler/icons-react';
@@ -32,6 +33,7 @@ type ContactDetailPanelProps = {
   error: unknown;
   isPending: boolean;
   onEditStart: (contact: Contact) => void;
+  onOpenProfile?: (contact: Contact) => void;
 };
 
 type DetailItemProps = {
@@ -68,6 +70,7 @@ export function ContactDetailPanel({
   error,
   isPending,
   onEditStart,
+  onOpenProfile,
 }: ContactDetailPanelProps) {
   const locale = useLocale();
   const t = useTranslations('common.contacts');
@@ -125,13 +128,24 @@ export function ContactDetailPanel({
               </Text>
             </Group>
           </Stack>
-          <Button
-            leftSection={<IconEdit size={18} />}
-            onClick={() => onEditStart(contact)}
-            variant="light"
-          >
-            {t('actions.edit')}
-          </Button>
+          <Group gap="xs">
+            {onOpenProfile ? (
+              <Button
+                leftSection={<IconExternalLink size={18} />}
+                onClick={() => onOpenProfile(contact)}
+                variant="light"
+              >
+                {t('actions.openProfile')}
+              </Button>
+            ) : null}
+            <Button
+              leftSection={<IconEdit size={18} />}
+              onClick={() => onEditStart(contact)}
+              variant="light"
+            >
+              {t('actions.edit')}
+            </Button>
+          </Group>
         </Group>
 
         <Group gap={6} wrap="wrap">
@@ -202,6 +216,30 @@ export function ContactDetailPanel({
           ) : (
             <Text c="dimmed" size="sm">
               {t('detail.noRoleContexts')}
+            </Text>
+          )}
+        </Stack>
+
+        <Stack gap="sm">
+          <Title order={3} size="h5">
+            {t('detail.whatsappIdentities')}
+          </Title>
+          {contact.whatsappIdentities.length > 0 ? (
+            <SimpleGrid cols={{ base: 1, sm: 2 }}>
+              {contact.whatsappIdentities.map((identity) => (
+                <Stack key={identity.id} gap={4}>
+                  <Text fw={600} size="sm">
+                    {identity.displayName ??
+                      identity.phoneNumber ??
+                      unavailableLabel}
+                  </Text>
+                  <Code fz="xs">{identity.externalContactId}</Code>
+                </Stack>
+              ))}
+            </SimpleGrid>
+          ) : (
+            <Text c="dimmed" size="sm">
+              {t('detail.noWhatsappIdentities')}
             </Text>
           )}
         </Stack>

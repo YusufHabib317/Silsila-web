@@ -33,7 +33,9 @@
       "loadMore": "تحميل المزيد",
       "newContact": "جهة اتصال جديدة",
       "refresh": "تحديث",
-      "saveChanges": "حفظ التغييرات"
+      "saveChanges": "حفظ التغييرات",
+      "backToContacts": "Back to contacts",
+      "openProfile": "Open profile"
     },
     "contact": {
       "moreRoles": "+{count, plural, one {# دور} other {# أدوار}}",
@@ -52,7 +54,9 @@
       "notes": "ملاحظات",
       "phoneNumber": "رقم الهاتف",
       "roleContexts": "سياقات الأدوار",
-      "updatedAt": "حدثت في"
+      "updatedAt": "حدثت في",
+      "noWhatsappIdentities": "No WhatsApp sender identities are linked.",
+      "whatsappIdentities": "WhatsApp identities"
     },
     "empty": {
       "noContacts": "لا توجد جهات اتصال تطابق هذا العرض.",
@@ -81,7 +85,10 @@
       "phoneNumberLabel": "رقم الهاتف",
       "phoneNumberPlaceholder": "+963 ...",
       "rolesLabel": "الأدوار",
-      "rolesPlaceholder": "اختر أدوار جهة الاتصال"
+      "rolesPlaceholder": "اختر أدوار جهة الاتصال",
+      "whatsappIdsLabel": "WhatsApp sender ids",
+      "whatsappIdsPlaceholder": "236975239991464@lid",
+      "whatsappIdsTooLong": "WhatsApp sender ids must be 500 characters or fewer"
     },
     "list": {
       "loaded": "تم تحميل {count}",
@@ -108,6 +115,12 @@
       "merchant": "تاجر",
       "supplier": "مورد",
       "unknown": "غير معروف"
+    },
+    "profile": {
+      "contactBadge": "Contact profile",
+      "messagesTitle": "WhatsApp messages",
+      "noMessages": "No WhatsApp messages are linked to this contact.",
+      "subtitle": "Review contact details, linked WhatsApp identities, and related message history."
     }
   },
   "products": {
@@ -256,7 +269,9 @@
       "messageId": "معرف الرسالة",
       "rawPayloadHidden": "لا يتم عرض JSON الخام لرسائل واتساب في هذا الوارد.",
       "receivedAt": "وصلت في",
-      "senderPhone": "هاتف المرسل"
+      "senderPhone": "هاتف المرسل",
+      "linkedContact": "Contact",
+      "senderExternalId": "Sender WhatsApp id"
     },
     "empty": {
       "noMessages": "لا توجد رسائل واتساب تطابق هذا العرض.",

@@ -40,17 +40,34 @@ function cleanText(value: string) {
   return trimmedValue || null;
 }
 
+function cleanWhatsappExternalContactIds(value: string) {
+  return Array.from(
+    new Set(
+      value
+        .split(/[\n,]+/)
+        .map((externalContactId) => externalContactId.trim())
+        .filter(Boolean),
+    ),
+  );
+}
+
 export function buildCreateContactRequest(
   values: ContactFormValues,
 ): CreateContactRequest {
   const phoneNumber = cleanText(values.phoneNumber);
   const notes = cleanText(values.notes);
+  const whatsappExternalContactIds = cleanWhatsappExternalContactIds(
+    values.whatsappExternalContactIdsText,
+  );
 
   return {
     displayName: values.displayName.trim(),
     ...(phoneNumber ? { phoneNumber } : {}),
     ...(notes ? { notes } : {}),
     ...(values.roles.length > 0 ? { roles: values.roles } : {}),
+    ...(whatsappExternalContactIds.length > 0
+      ? { whatsappExternalContactIds }
+      : {}),
   };
 }
 
@@ -62,5 +79,8 @@ export function buildUpdateContactRequest(
     notes: cleanText(values.notes),
     phoneNumber: cleanText(values.phoneNumber),
     roles: values.roles,
+    whatsappExternalContactIds: cleanWhatsappExternalContactIds(
+      values.whatsappExternalContactIdsText,
+    ),
   };
 }

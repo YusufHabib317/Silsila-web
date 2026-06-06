@@ -80,6 +80,7 @@ export function InboxMessageDetailPanel({
     temporary: t('flags.temporary'),
     tracked: t('flags.tracked'),
   };
+  const unavailableLabel = t('message.notAvailable');
 
   if (!message && !isPending && !error) {
     return (
@@ -168,11 +169,19 @@ export function InboxMessageDetailPanel({
           />
           <DetailItem
             label={t('detail.chatExternalId')}
-            value={message.chat?.externalChatId ?? t('message.notAvailable')}
+            value={message.chat?.externalChatId ?? unavailableLabel}
+          />
+          <DetailItem
+            label={t('detail.linkedContact')}
+            value={message.linkedContact?.displayName ?? unavailableLabel}
           />
           <DetailItem
             label={t('detail.senderPhone')}
-            value={message.sender?.phoneNumber ?? t('message.notAvailable')}
+            value={message.sender?.phoneNumber ?? unavailableLabel}
+          />
+          <DetailItem
+            label={t('detail.senderExternalId')}
+            value={message.sender?.externalContactId ?? unavailableLabel}
           />
         </SimpleGrid>
 

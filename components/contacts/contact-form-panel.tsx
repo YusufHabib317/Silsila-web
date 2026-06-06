@@ -27,6 +27,7 @@ export type ContactFormValues = {
   notes: string;
   phoneNumber: string;
   roles: ContactRole[];
+  whatsappExternalContactIdsText: string;
 };
 
 type ContactFormPanelProps = {
@@ -48,6 +49,9 @@ function buildInitialValues(
       notes: contact.notes ?? '',
       phoneNumber: contact.phoneNumber ?? '',
       roles: contact.roles.map((assignment) => assignment.role),
+      whatsappExternalContactIdsText: contact.whatsappIdentities
+        .map((identity) => identity.externalContactId)
+        .join('\n'),
     };
   }
 
@@ -56,6 +60,7 @@ function buildInitialValues(
     notes: '',
     phoneNumber: '',
     roles: [],
+    whatsappExternalContactIdsText: '',
   };
 }
 
@@ -91,6 +96,8 @@ export function ContactFormPanel({
       },
       notes: (value) =>
         value.trim().length > 1000 ? t('form.notesTooLong') : null,
+      whatsappExternalContactIdsText: (value) =>
+        value.trim().length > 500 ? t('form.whatsappIdsTooLong') : null,
       phoneNumber: (value) => {
         const trimmedValue = value.trim();
 
@@ -136,6 +143,13 @@ export function ContactFormPanel({
             placeholder={t('form.rolesPlaceholder')}
             searchable
             {...form.getInputProps('roles')}
+          />
+          <Textarea
+            autosize
+            label={t('form.whatsappIdsLabel')}
+            minRows={2}
+            placeholder={t('form.whatsappIdsPlaceholder')}
+            {...form.getInputProps('whatsappExternalContactIdsText')}
           />
           <Textarea
             autosize
