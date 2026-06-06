@@ -21,14 +21,10 @@ import {
 import { notifications } from '@mantine/notifications';
 import { IconAlertTriangle, IconUsers } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
-import {
-  createContact,
-  getContact,
-  listContacts,
-  updateContact,
-} from '@/lib/api/contacts';
+import { getContact, listContacts, updateContact } from '@/lib/api/contacts';
 import { getApiErrorMessage } from '@/lib/api/errors';
 import { ensureCsrfToken } from '@/lib/api/session-token';
 import type { Contact, Paginated } from '@/lib/api/types';
@@ -43,7 +39,6 @@ import {
 import { ContactListPanel } from './contact-list-panel';
 import {
   buildContactParams,
-  buildCreateContactRequest,
   buildUpdateContactRequest,
   type ContactFilters,
 } from './contact-requests';
@@ -57,6 +52,7 @@ type UpdateContactVariables = {
 export function ContactsPage() {
   const t = useTranslations('common.contacts');
   const queryClient = useQueryClient();
+  const router = useRouter();
   const selectedTenantId = useSessionStore((state) => state.selectedTenantId);
   const [activeContactId, setActiveContactId] = useState<string | null>(null);
   const [formMode, setFormMode] = useState<ContactFormMode>('create');
@@ -94,36 +90,6 @@ export function ContactsPage() {
       return getContact(activeContactId);
     },
     queryKey: ['contact', selectedTenantId, activeContactId],
-  });
-  const createMutation = useMutation({
-    mutationFn: async (values: ContactFormValues) => {
-      await ensureCsrfToken();
-
-      return createContact(buildCreateContactRequest(values));
-    },
-    onError: (error) => {
-      notifications.show({
-        color: 'red',
-        message: getApiErrorMessage(error),
-        title: t('notifications.createFailed'),
-      });
-    },
-    onSuccess: (contact) => {
-      queryClient.setQueryData(
-        ['contact', selectedTenantId, contact.id],
-        contact,
-      );
-      setActiveContactId(contact.id);
-      setFormMode('create');
-      void queryClient.invalidateQueries({ queryKey: ['contacts'] });
-      notifications.show({
-        color: 'green',
-        message: t('notifications.createSuccessMessage', {
-          name: contact.displayName,
-        }),
-        title: t('notifications.createSuccessTitle'),
-      });
-    },
   });
   const updateMutation = useMutation({
     mutationFn: async ({ contactId, values }: UpdateContactVariables) => {
@@ -174,22 +140,17 @@ export function ContactsPage() {
   }
 
   function handleFormSubmit(values: ContactFormValues) {
-    if (formMode === 'edit') {
-      if (!editingContact) {
-        notifications.show({
-          color: 'red',
-          message: t('errors.contactIdMissing'),
-          title: t('notifications.updateFailed'),
-        });
+    if (!editingContact) {
+      notifications.show({
+        color: 'red',
+        message: t('errors.contactIdMissing'),
+        title: t('notifications.updateFailed'),
+      });
 
-        return;
-      }
-
-      updateMutation.mutate({ contactId: editingContact.id, values });
       return;
     }
 
-    createMutation.mutate(values);
+    updateMutation.mutate({ contactId: editingContact.id, values });
   }
 
   if (!selectedTenantId) {
@@ -232,10 +193,7 @@ export function ContactsPage() {
             isPending={contactsQuery.isPending}
             isRefetching={contactsQuery.isRefetching}
             onContactSelect={handleContactSelect}
-            onCreateStart={() => {
-              setActiveContactId(null);
-              setFormMode('create');
-            }}
+            onCreateStart={() => router.push('/app/contacts/new')}
             onLoadMore={() => void contactsQuery.fetchNextPage()}
             onRefresh={() => void contactsQuery.refetch()}
             onRoleFilterChange={handleRoleFilterChange}
@@ -247,22 +205,16 @@ export function ContactsPage() {
 
         <Grid.Col span={{ base: 12, xl: 5 }}>
           <Stack gap="md">
-            <ContactFormPanel
-              key={
-                formMode === 'edit'
-                  ? `edit-${editingContact?.id ?? 'pending'}`
-                  : 'create'
-              }
-              contact={editingContact}
-              isSubmitting={
-                formMode === 'edit'
-                  ? updateMutation.isPending
-                  : createMutation.isPending
-              }
-              mode={formMode}
-              onCancel={() => setFormMode('create')}
-              onSubmit={handleFormSubmit}
-            />
+            {formMode === 'edit' ? (
+              <ContactFormPanel
+                key={`edit-${editingContact?.id ?? 'pending'}`}
+                contact={editingContact}
+                isSubmitting={updateMutation.isPending}
+                mode={formMode}
+                onCancel={() => setFormMode('create')}
+                onSubmit={handleFormSubmit}
+              />
+            ) : null}
             <ContactDetailPanel
               contact={detailQuery.data ?? null}
               error={detailQuery.error}

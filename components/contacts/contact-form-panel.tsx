@@ -35,6 +35,7 @@ type ContactFormPanelProps = {
   mode: ContactFormMode;
   onCancel: () => void;
   onSubmit: (values: ContactFormValues) => void;
+  showCancel?: boolean;
 };
 
 function buildInitialValues(
@@ -64,6 +65,7 @@ export function ContactFormPanel({
   mode,
   onCancel,
   onSubmit,
+  showCancel = false,
 }: ContactFormPanelProps) {
   const t = useTranslations('common.contacts');
   const roleOptions = useMemo(
@@ -144,7 +146,7 @@ export function ContactFormPanel({
           />
 
           <Group justify="flex-end">
-            {isEditing ? (
+            {isEditing || showCancel ? (
               <Button
                 leftSection={<IconX size={18} />}
                 onClick={onCancel}
