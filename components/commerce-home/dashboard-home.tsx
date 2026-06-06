@@ -1,7 +1,10 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import {
+  Alert,
   Badge,
+  Button,
   Group,
   Paper,
   SimpleGrid,
@@ -11,60 +14,92 @@ import {
   Title,
 } from '@mantine/core';
 import {
-  IconApi,
-  IconShieldCheck,
-  IconUsersGroup,
-  IconWorld,
+  IconAlertTriangle,
+  IconBuildingStore,
+  IconCoin,
+  IconPackage,
+  IconReceipt,
+  IconRefresh,
+  IconShoppingCart,
 } from '@tabler/icons-react';
+import { useLocale } from 'next-intl';
 
-import { getApiBaseUrl } from '@/lib/api/env';
+import { getDashboardStats } from '@/lib/api/dashboard';
 import { useSessionStore } from '@/store/session';
 
-const STATUS_ITEMS = [
-  {
-    icon: IconApi,
-    label: 'API client',
-    value: 'Cookie + CSRF ready',
-  },
-  {
-    icon: IconShieldCheck,
-    label: 'Session',
-    value: 'Protected routes active',
-  },
-  {
-    icon: IconUsersGroup,
-    label: 'Tenant header',
-    value: 'x-tenant-id wired',
-  },
-  {
-    icon: IconWorld,
-    label: 'Backend origin',
-    value: getApiBaseUrl(),
-  },
-];
+import {
+  EMPTY_DASHBOARD_STATS,
+  formatCheckedAt,
+  formatMoneyTotals,
+  formatNumber,
+} from './dashboard-formatting';
+import {
+  BenefitFlowPanel,
+  OrdersOverviewPanel,
+  ProductsContactsPanel,
+} from './dashboard-overview-panels';
+import { StatCard } from './dashboard-stat-card';
 
 export function CommerceDashboardHome() {
+  const locale = useLocale();
   const selectedTenantId = useSessionStore((state) => state.selectedTenantId);
   const tenants = useSessionStore((state) => state.tenants);
   const user = useSessionStore((state) => state.user);
   const selectedTenant = tenants.find(
     (tenant) => tenant.id === selectedTenantId,
   );
+  const statsQuery = useQuery({
+    enabled: Boolean(selectedTenantId),
+    queryFn: getDashboardStats,
+    queryKey: ['dashboardStats', selectedTenantId],
+  });
+  const stats = statsQuery.data ?? EMPTY_DASHBOARD_STATS;
+  const isLoadingStats = statsQuery.isPending && Boolean(selectedTenantId);
+
+  if (!selectedTenantId) {
+    return (
+      <Alert color="yellow" icon={<IconAlertTriangle size={18} />}>
+        Select a workspace to load dashboard statistics.
+      </Alert>
+    );
+  }
 
   return (
     <Stack gap="xl">
-      <Group justify="space-between" wrap="nowrap">
+      <Group align="flex-start" justify="space-between" wrap="wrap">
         <Stack gap={4}>
-          <Title order={1} size="h2">
-            Dashboard
-          </Title>
-          <Text c="dimmed">{selectedTenant?.name ?? 'No tenant selected'}</Text>
+          <Group gap="sm">
+            <ThemeIcon color="blue" radius="sm" variant="light">
+              <IconBuildingStore size={18} />
+            </ThemeIcon>
+            <Title order={1} size="h2">
+              Dashboard
+            </Title>
+          </Group>
+          <Text c="dimmed" size="sm">
+            Benefit and commerce statistics for {selectedTenant?.name}.
+          </Text>
         </Stack>
-        {selectedTenant ? <Badge size="lg">{selectedTenant.role}</Badge> : null}
+        <Group gap="sm">
+          {selectedTenant ? (
+            <Badge radius="sm" size="lg" variant="light">
+              {selectedTenant.role}
+            </Badge>
+          ) : null}
+          <Button
+            leftSection={<IconRefresh size={16} />}
+            loading={statsQuery.isRefetching}
+            onClick={() => void statsQuery.refetch()}
+            size="sm"
+            variant="light"
+          >
+            Refresh
+          </Button>
+        </Group>
       </Group>
 
       <Paper p="lg" radius="sm" withBorder>
-        <Group justify="space-between" wrap="wrap">
+        <Group align="flex-start" justify="space-between" wrap="wrap">
           <Stack gap={2}>
             <Text c="dimmed" size="sm">
               Signed in as
@@ -85,30 +120,77 @@ export function CommerceDashboardHome() {
               </Text>
             </Stack>
           ) : null}
+          <Stack gap={2}>
+            <Text c="dimmed" size="sm">
+              Updated
+            </Text>
+            <Text fw={700}>{formatCheckedAt(stats.checkedAt, locale)}</Text>
+            <Text c="dimmed" size="sm">
+              Tenant statistics
+            </Text>
+          </Stack>
         </Group>
       </Paper>
 
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
-        {STATUS_ITEMS.map((item) => {
-          const Icon = item.icon;
+      {statsQuery.error ? (
+        <Alert color="red" icon={<IconAlertTriangle size={18} />}>
+          Could not load dashboard statistics. Try refreshing the dashboard.
+        </Alert>
+      ) : null}
 
-          return (
-            <Paper key={item.label} p="lg" radius="sm" withBorder>
-              <Stack gap="md">
-                <ThemeIcon color="teal" radius="sm" size="lg" variant="light">
-                  <Icon size={20} />
-                </ThemeIcon>
-                <Stack gap={2}>
-                  <Text fw={700}>{item.label}</Text>
-                  <Text c="dimmed" lineClamp={2} size="sm">
-                    {item.value}
-                  </Text>
-                </Stack>
-              </Stack>
-            </Paper>
-          );
-        })}
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
+        <StatCard
+          color="blue"
+          icon={IconCoin}
+          isLoading={isLoadingStats}
+          label="Gross revenue"
+          meta={`${formatNumber(stats.orders.paid, locale)} paid orders`}
+          value={formatMoneyTotals(stats.orders.grossAmount, locale)}
+        />
+        <StatCard
+          color="orange"
+          icon={IconShoppingCart}
+          isLoading={isLoadingStats}
+          label="Open orders"
+          meta={`${formatNumber(stats.orders.needsReview, locale)} need review`}
+          value={formatNumber(stats.orders.open, locale)}
+        />
+        <StatCard
+          color="teal"
+          icon={IconPackage}
+          isLoading={isLoadingStats}
+          label="Active products"
+          meta={`${formatNumber(stats.products.lowStock, locale)} low stock`}
+          value={formatNumber(stats.products.active, locale)}
+        />
+        <StatCard
+          color="grape"
+          icon={IconReceipt}
+          isLoading={isLoadingStats}
+          label="Pending benefit"
+          meta={formatMoneyTotals(stats.commissions.pendingAmount, locale)}
+          value={formatNumber(stats.commissions.pending, locale)}
+        />
       </SimpleGrid>
+
+      <SimpleGrid cols={{ base: 1, lg: 2 }}>
+        <OrdersOverviewPanel
+          isLoading={isLoadingStats}
+          locale={locale}
+          stats={stats}
+        />
+        <ProductsContactsPanel
+          isLoading={isLoadingStats}
+          locale={locale}
+          stats={stats}
+        />
+      </SimpleGrid>
+
+      <BenefitFlowPanel
+        isLoading={isLoadingStats}
+        locale={locale}
+        stats={stats}
+      />
     </Stack>
   );
 }
