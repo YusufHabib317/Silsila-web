@@ -318,6 +318,7 @@
       "title": "Messages"
     },
     "message": {
+      "group": "Group",
       "noText": "No text body",
       "notAvailable": "Not available",
       "unknownChat": "Unknown chat",
@@ -761,6 +762,13 @@
     "chat": {
       "unnamed": "Unnamed chat"
     },
+    "chatKind": {
+      "broadcast": "Broadcast",
+      "channel": "Channel",
+      "direct": "Direct chat",
+      "group": "Group",
+      "unknown": "Chat"
+    },
     "date": {
       "never": "Never"
     },
@@ -778,10 +786,20 @@
       "allAccounts": "All accounts",
       "allSourceTypes": "All source types",
       "allTrackingStatuses": "All tracking states",
+      "needsReview": "Needs review",
       "search": "Search",
       "searchPlaceholder": "Chat name or id",
       "sourceType": "Source type",
       "trackingStatus": "Tracking"
+    },
+    "guide": {
+      "ignoredDesc": "Noise. New messages are archived out of the main inbox.",
+      "intro": "Classify each WhatsApp chat once. New messages are then handled automatically based on its status.",
+      "needsReviewNote": "Chats marked “Needs review” haven’t been classified yet — set a status so they’re handled the way you want.",
+      "personalDesc": "Private chat. Its messages stay out of the business view.",
+      "sourceTypeNote": "Source type just labels who the chat is with (customer, supplier, agent group…) to make filtering easier.",
+      "title": "How tracking works",
+      "trackedDesc": "Business chat. Its messages appear in your inbox."
     },
     "list": {
       "loaded": "{count} loaded",
@@ -807,6 +825,7 @@
     },
     "status": {
       "ignored": "Ignored",
+      "needsReview": "Needs review",
       "personal": "Personal",
       "tracked": "Tracked",
       "unconfigured": "Not set"

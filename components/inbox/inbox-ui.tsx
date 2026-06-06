@@ -3,6 +3,11 @@ import dayjs from 'dayjs';
 
 import type { WhatsappMessage, WhatsappMessageType } from '@/lib/api/types';
 import type { BooleanQueryValue } from '@/lib/api/whatsapp';
+import {
+  getWhatsappChatKind,
+  jidToPhoneNumber,
+  stripJidDomain,
+} from '@/lib/whatsapp-jid';
 
 export type BooleanFilter = BooleanQueryValue | 'all';
 export type MessageTypeFilter = WhatsappMessageType | 'all';
@@ -43,16 +48,36 @@ const MESSAGE_TYPE_META: Record<WhatsappMessageType, BadgeMeta> = {
   unknown: { color: 'gray' },
 };
 
+export function isGroupMessage(message: WhatsappMessage): boolean {
+  return getWhatsappChatKind(message.chat?.externalChatId) === 'group';
+}
+
 export function getMessageChatLabel(
   message: WhatsappMessage,
   fallbackLabel: string,
 ) {
   return (
-    message.chat?.displayName ?? message.chat?.externalChatId ?? fallbackLabel
+    message.chat?.displayName ??
+    stripJidDomain(message.chat?.externalChatId) ??
+    fallbackLabel
   );
 }
 
-export function getMessageSenderLabel(
+export function getMessageSenderPhone(
+  message: WhatsappMessage,
+): string | null {
+  if (message.isFromMe) {
+    return null;
+  }
+
+  return (
+    message.linkedContact?.phoneNumber ??
+    message.sender?.phoneNumber ??
+    jidToPhoneNumber(message.sender?.externalContactId)
+  );
+}
+
+export function getMessageSenderName(
   message: WhatsappMessage,
   fallbackLabel: string,
   selfLabel: string,
@@ -63,10 +88,9 @@ export function getMessageSenderLabel(
 
   return (
     message.linkedContact?.displayName ??
-    message.linkedContact?.phoneNumber ??
     message.sender?.displayName ??
-    message.sender?.phoneNumber ??
-    message.sender?.externalContactId ??
+    getMessageSenderPhone(message) ??
+    stripJidDomain(message.sender?.externalContactId) ??
     fallbackLabel
   );
 }

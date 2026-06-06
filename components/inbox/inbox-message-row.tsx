@@ -1,7 +1,13 @@
 'use client';
 
-import { Box, Group, Stack, Text, UnstyledButton } from '@mantine/core';
-import { IconArrowUpRight, IconMessageCircle } from '@tabler/icons-react';
+import { Badge, Box, Group, Stack, Text, UnstyledButton } from '@mantine/core';
+import {
+  IconArrowUpRight,
+  IconMessageCircle,
+  IconPhone,
+  IconUser,
+  IconUsersGroup,
+} from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 
 import type { WhatsappMessage } from '@/lib/api/types';
@@ -10,7 +16,9 @@ import {
   formatMessageDate,
   getMessageChatLabel,
   getMessagePreview,
-  getMessageSenderLabel,
+  getMessageSenderName,
+  getMessageSenderPhone,
+  isGroupMessage,
   MessageFlagBadges,
   MessageTypeBadge,
 } from './inbox-ui';
@@ -34,6 +42,14 @@ export function InboxMessageRow({
     temporary: t('flags.temporary'),
     tracked: t('flags.tracked'),
   };
+  const isGroup = isGroupMessage(message);
+  const chatLabel = getMessageChatLabel(message, t('message.unknownChat'));
+  const senderName = getMessageSenderName(
+    message,
+    t('message.unknownSender'),
+    t('message.you'),
+  );
+  const senderPhone = getMessageSenderPhone(message);
 
   return (
     <UnstyledButton
@@ -50,22 +66,38 @@ export function InboxMessageRow({
       <Stack gap="sm">
         <Group align="flex-start" justify="space-between" wrap="nowrap">
           <Group gap="xs" miw={0} wrap="nowrap">
-            {message.isFromMe ? (
+            {isGroup ? (
+              <IconUsersGroup size={16} />
+            ) : message.isFromMe ? (
               <IconArrowUpRight size={16} />
             ) : (
               <IconMessageCircle size={16} />
             )}
-            <Stack gap={1} miw={0}>
-              <Text fw={700} lineClamp={1} size="sm">
-                {getMessageChatLabel(message, t('message.unknownChat'))}
-              </Text>
-              <Text c="dimmed" lineClamp={1} size="xs">
-                {getMessageSenderLabel(
-                  message,
-                  t('message.unknownSender'),
-                  t('message.you'),
-                )}
-              </Text>
+            <Stack gap={2} miw={0}>
+              <Group gap={6} miw={0} wrap="nowrap">
+                <Text fw={700} lineClamp={1} size="sm">
+                  {chatLabel}
+                </Text>
+                {isGroup ? (
+                  <Badge color="grape" radius="sm" size="xs" variant="light">
+                    {t('message.group')}
+                  </Badge>
+                ) : null}
+              </Group>
+              <Group c="dimmed" gap={4} miw={0} wrap="nowrap">
+                <IconUser size={13} />
+                <Text lineClamp={1} size="xs">
+                  {senderName}
+                </Text>
+              </Group>
+              {senderPhone && senderPhone !== senderName ? (
+                <Group c="dimmed" gap={4} miw={0} wrap="nowrap">
+                  <IconPhone size={13} />
+                  <Text lineClamp={1} size="xs">
+                    {senderPhone}
+                  </Text>
+                </Group>
+              ) : null}
             </Stack>
           </Group>
           <Text c="dimmed" size="xs" ta="end">
@@ -73,7 +105,7 @@ export function InboxMessageRow({
           </Text>
         </Group>
 
-        <Text lineClamp={2} size="sm">
+        <Text lineClamp={2} size="sm" style={{ whiteSpace: 'pre-wrap' }}>
           {getMessagePreview(message, t('message.noText'))}
         </Text>
 

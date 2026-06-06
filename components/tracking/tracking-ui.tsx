@@ -5,12 +5,19 @@ import type {
   WhatsappChat,
   WhatsappSourceType,
 } from '@/lib/api/types';
+import {
+  formatPhoneNumber,
+  getWhatsappChatKind,
+  jidToPhoneNumber,
+  type WhatsappChatKind,
+} from '@/lib/whatsapp-jid';
 
-export type TrackingStatusFilter = TrackedSourceStatus | 'all';
+export type TrackingStatusFilter = TrackedSourceStatus | 'unconfigured' | 'all';
 export type SourceTypeFilter = WhatsappSourceType | 'all';
 export type DraftTrackingStatus = TrackedSourceStatus | null;
 
 export const FILTER_ALL = 'all';
+export const TRACKING_STATUS_UNCONFIGURED = 'unconfigured';
 
 type StatusMeta = {
   color: string;
@@ -21,6 +28,7 @@ export const TRACKING_STATUS_FILTER_OPTIONS: Array<{
   value: TrackingStatusFilter;
 }> = [
   { labelKey: 'filters.allTrackingStatuses', value: FILTER_ALL },
+  { labelKey: 'filters.needsReview', value: TRACKING_STATUS_UNCONFIGURED },
   { labelKey: 'status.tracked', value: 'tracked' },
   { labelKey: 'status.ignored', value: 'ignored' },
   { labelKey: 'status.personal', value: 'personal' },
@@ -58,8 +66,34 @@ const TRACKING_STATUS_META: Record<TrackedSourceStatus, StatusMeta> = {
   personal: { color: 'yellow' },
 };
 
+export const CHAT_KIND_META: Record<
+  WhatsappChatKind,
+  { color: string; labelKey: string }
+> = {
+  direct: { color: 'blue', labelKey: 'chatKind.direct' },
+  group: { color: 'grape', labelKey: 'chatKind.group' },
+  channel: { color: 'indigo', labelKey: 'chatKind.channel' },
+  broadcast: { color: 'cyan', labelKey: 'chatKind.broadcast' },
+  unknown: { color: 'gray', labelKey: 'chatKind.unknown' },
+};
+
+export function getChatKind(chat: WhatsappChat): WhatsappChatKind {
+  return getWhatsappChatKind(chat.externalChatId);
+}
+
+export function getChatPhoneNumber(chat: WhatsappChat): string | null {
+  return formatPhoneNumber(jidToPhoneNumber(chat.externalChatId));
+}
+
+// The best human-friendly name we can derive: an explicit display name, else a
+// formatted phone number (direct chats), else null so the caller can fall back
+// to a chat-kind label like "Group" / "Channel".
+export function getChatPrimaryName(chat: WhatsappChat): string | null {
+  return chat.displayName ?? getChatPhoneNumber(chat);
+}
+
 export function getChatLabel(chat: WhatsappChat, fallbackLabel: string) {
-  return chat.displayName ?? chat.externalChatId ?? fallbackLabel;
+  return getChatPrimaryName(chat) ?? chat.externalChatId ?? fallbackLabel;
 }
 
 export function getChatSourceType(chat: WhatsappChat) {

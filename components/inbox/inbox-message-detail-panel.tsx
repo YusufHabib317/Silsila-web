@@ -2,6 +2,7 @@
 
 import {
   Alert,
+  Badge,
   Box,
   Code,
   Divider,
@@ -27,7 +28,9 @@ import {
   formatMessageDate,
   getMessageChatLabel,
   getMessagePreview,
-  getMessageSenderLabel,
+  getMessageSenderName,
+  getMessageSenderPhone,
+  isGroupMessage,
   MessageFlagBadges,
   MessageTypeBadge,
 } from './inbox-ui';
@@ -124,11 +127,18 @@ export function InboxMessageDetailPanel({
       <Stack gap="lg">
         <Group align="flex-start" justify="space-between" wrap="wrap">
           <Stack gap={4}>
-            <Title order={2} size="h4">
-              {getMessageChatLabel(message, t('message.unknownChat'))}
-            </Title>
+            <Group gap="xs">
+              <Title order={2} size="h4">
+                {getMessageChatLabel(message, t('message.unknownChat'))}
+              </Title>
+              {isGroupMessage(message) ? (
+                <Badge color="grape" radius="sm" variant="light">
+                  {t('message.group')}
+                </Badge>
+              ) : null}
+            </Group>
             <Text c="dimmed" size="sm">
-              {getMessageSenderLabel(
+              {getMessageSenderName(
                 message,
                 t('message.unknownSender'),
                 t('message.you'),
@@ -177,7 +187,7 @@ export function InboxMessageDetailPanel({
           />
           <DetailItem
             label={t('detail.senderPhone')}
-            value={message.sender?.phoneNumber ?? unavailableLabel}
+            value={getMessageSenderPhone(message) ?? unavailableLabel}
           />
           <DetailItem
             label={t('detail.senderExternalId')}

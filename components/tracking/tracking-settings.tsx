@@ -39,6 +39,7 @@ import type {
 import { useSessionStore } from '@/store/session';
 
 import { TrackingChatListPanel } from './tracking-chat-list-panel';
+import { TrackingGuide } from './tracking-guide';
 import {
   FILTER_ALL,
   type SourceTypeFilter,
@@ -217,6 +218,8 @@ export function TrackingSettings() {
           {t('page.receiveOnly')}
         </Badge>
       </Group>
+
+      <TrackingGuide />
 
       <TrackingChatListPanel
         accountFilter={accountFilter}

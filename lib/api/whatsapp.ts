@@ -28,7 +28,8 @@ export type ListWhatsappChatsParams = {
   limit?: number;
   search?: string;
   sourceType?: WhatsappSourceType;
-  trackingStatus?: TrackedSourceStatus;
+  // 'unconfigured' is a filter-only sentinel for chats with no tracking row yet.
+  trackingStatus?: TrackedSourceStatus | 'unconfigured';
   whatsappAccountId?: string;
 };
 

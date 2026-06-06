@@ -1,19 +1,40 @@
 'use client';
 
-import { Button, Group, Select, Stack, Table, Text } from '@mantine/core';
-import { IconDeviceMobile, IconDeviceFloppy } from '@tabler/icons-react';
+import {
+  Badge,
+  Button,
+  Group,
+  Select,
+  Stack,
+  Table,
+  Text,
+  ThemeIcon,
+} from '@mantine/core';
+import {
+  IconAlertCircle,
+  IconDeviceMobile,
+  IconDeviceFloppy,
+  IconMessageCircle,
+  IconSpeakerphone,
+  IconUser,
+  IconUsersGroup,
+} from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
+import type { ComponentType } from 'react';
 
 import type {
   TrackedSourceStatus,
   WhatsappChat,
   WhatsappSourceType,
 } from '@/lib/api/types';
+import type { WhatsappChatKind } from '@/lib/whatsapp-jid';
 
 import {
+  CHAT_KIND_META,
   type DraftTrackingStatus,
-  getChatLabel,
+  getChatKind,
+  getChatPrimaryName,
   getChatSourceType,
   hasTrackingDraftChanged,
   SOURCE_TYPE_EDITOR_OPTIONS,
@@ -21,6 +42,15 @@ import {
   TrackingStatusBadge,
 } from './tracking-ui';
 import { formatDate } from '@/components/whatsapp/whatsapp-ui';
+
+const CHAT_KIND_ICON: Record<WhatsappChatKind, ComponentType<{ size?: number }>> =
+  {
+    direct: IconUser,
+    group: IconUsersGroup,
+    channel: IconSpeakerphone,
+    broadcast: IconSpeakerphone,
+    unknown: IconMessageCircle,
+  };
 
 type TrackingChatRowProps = {
   accountLabel: string;
@@ -67,6 +97,11 @@ export function TrackingChatRow({
   );
   const hasChanges = hasTrackingDraftChanged(chat, status, sourceType);
   const canSave = Boolean(status) && hasChanges && !isSaving;
+  const needsReview = !chat.tracking;
+  const chatKind = getChatKind(chat);
+  const kindMeta = CHAT_KIND_META[chatKind];
+  const KindIcon = CHAT_KIND_ICON[chatKind];
+  const primaryName = getChatPrimaryName(chat) ?? t(kindMeta.labelKey);
 
   function handleStatusChange(value: string | null) {
     setStatus(value as DraftTrackingStatus);
@@ -85,12 +120,35 @@ export function TrackingChatRow({
   return (
     <Table.Tr>
       <Table.Td>
-        <Stack gap={2}>
-          <Text fw={700}>{getChatLabel(chat, t('chat.unnamed'))}</Text>
-          <Text c="dimmed" size="xs">
-            {chat.externalChatId}
-          </Text>
-        </Stack>
+        <Group align="flex-start" gap="sm" wrap="nowrap">
+          <ThemeIcon color={kindMeta.color} radius="sm" size="lg" variant="light">
+            <KindIcon size={18} />
+          </ThemeIcon>
+          <Stack gap={4} miw={0}>
+            <Group gap="xs" wrap="wrap">
+              <Text fw={700} lineClamp={1}>
+                {primaryName}
+              </Text>
+              <Badge color={kindMeta.color} radius="sm" size="xs" variant="light">
+                {t(kindMeta.labelKey)}
+              </Badge>
+              {needsReview ? (
+                <Badge
+                  color="orange"
+                  leftSection={<IconAlertCircle size={12} />}
+                  radius="sm"
+                  size="xs"
+                  variant="light"
+                >
+                  {t('status.needsReview')}
+                </Badge>
+              ) : null}
+            </Group>
+            <Text c="dimmed" lineClamp={1} size="xs">
+              {chat.externalChatId}
+            </Text>
+          </Stack>
+        </Group>
       </Table.Td>
       <Table.Td>
         <Group gap="xs" wrap="nowrap">
