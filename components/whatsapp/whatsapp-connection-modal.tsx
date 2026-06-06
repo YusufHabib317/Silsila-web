@@ -27,6 +27,7 @@ import type { WhatsappAccount, WhatsappAccountDetail } from '@/lib/api/types';
 import { getApiErrorMessage } from '@/lib/api/errors';
 
 import {
+  canDisconnectAccount,
   getAccountLabel,
   formatCountdown,
   getStatusDescriptionKey,
@@ -99,6 +100,8 @@ function ConnectionContent({
     return null;
   }
 
+  const canDisconnect = canDisconnectAccount(account.status);
+
   return (
     <Stack gap="lg">
       <Group justify="space-between" wrap="wrap">
@@ -160,17 +163,16 @@ function ConnectionContent({
         >
           {t('actions.refreshStatus')}
         </Button>
-        <Button
-          color="red"
-          disabled={
-            account.status === 'disconnected' || account.status === 'disabled'
-          }
-          leftSection={<IconPlugOff size={18} />}
-          onClick={() => onDisconnect(account)}
-          variant="subtle"
-        >
-          {t('actions.disconnect')}
-        </Button>
+        {canDisconnect ? (
+          <Button
+            color="red"
+            leftSection={<IconPlugOff size={18} />}
+            onClick={() => onDisconnect(account)}
+            variant="subtle"
+          >
+            {t('actions.disconnect')}
+          </Button>
+        ) : null}
       </Group>
     </Stack>
   );

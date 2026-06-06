@@ -242,6 +242,13 @@ export function WhatsappSettings() {
     }
   }
 
+  const connectingAccountId = connectMutation.isPending
+    ? (connectMutation.variables ?? null)
+    : null;
+  const disconnectingAccountId = disconnectMutation.isPending
+    ? (disconnectMutation.variables ?? null)
+    : null;
+
   if (!selectedTenantId) {
     return (
       <Alert color="yellow" icon={<IconAlertTriangle size={18} />}>
@@ -284,8 +291,8 @@ export function WhatsappSettings() {
           <Grid.Col span={{ base: 12, lg: 8 }}>
             <WhatsappAccountListPanel
               accounts={accounts}
-              connectingAccountId={connectMutation.variables ?? null}
-              disconnectingAccountId={disconnectMutation.variables ?? null}
+              connectingAccountId={connectingAccountId}
+              disconnectingAccountId={disconnectingAccountId}
               error={accountsQuery.error}
               hasNextPage={Boolean(accountsQuery.hasNextPage)}
               isFetchingNextPage={accountsQuery.isFetchingNextPage}

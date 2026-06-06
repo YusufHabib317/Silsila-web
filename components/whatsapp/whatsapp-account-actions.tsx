@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import type { WhatsappAccount } from '@/lib/api/types';
 
 import {
+  canDisconnectAccount,
   getPrimaryActionLabelKey,
   shouldConnectBeforeOpening,
 } from './whatsapp-ui';
@@ -28,11 +29,12 @@ export function WhatsappAccountActions({
 }: WhatsappAccountActionsProps) {
   const t = useTranslations('common.whatsapp');
   const shouldConnect = shouldConnectBeforeOpening(account.status);
+  const canDisconnect = canDisconnectAccount(account.status);
 
   return (
     <Group gap="xs" justify="flex-end">
       <Button
-        disabled={account.status === 'disabled'}
+        disabled={account.status === 'disabled' || isDisconnecting}
         leftSection={
           shouldConnect ? <IconPlug size={16} /> : <IconQrcode size={16} />
         }
@@ -43,19 +45,19 @@ export function WhatsappAccountActions({
       >
         {t(getPrimaryActionLabelKey(account.status))}
       </Button>
-      <Button
-        color="red"
-        disabled={
-          account.status === 'disconnected' || account.status === 'disabled'
-        }
-        leftSection={<IconPlugOff size={16} />}
-        loading={isDisconnecting}
-        onClick={() => onDisconnect(account)}
-        size="xs"
-        variant="subtle"
-      >
-        {t('actions.disconnect')}
-      </Button>
+      {canDisconnect ? (
+        <Button
+          color="red"
+          disabled={isConnecting}
+          leftSection={<IconPlugOff size={16} />}
+          loading={isDisconnecting}
+          onClick={() => onDisconnect(account)}
+          size="xs"
+          variant="subtle"
+        >
+          {t('actions.disconnect')}
+        </Button>
+      ) : null}
     </Group>
   );
 }

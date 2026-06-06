@@ -77,6 +77,14 @@ export function shouldConnectBeforeOpening(status: WhatsappAccountStatus) {
   );
 }
 
+export function canDisconnectAccount(status: WhatsappAccountStatus) {
+  return (
+    status === 'connecting' ||
+    status === 'connected' ||
+    status === 'reconnecting'
+  );
+}
+
 export function formatDate(value: string | null, fallbackLabel: string) {
   return value ? dayjs(value).format('MMM D, HH:mm') : fallbackLabel;
 }
